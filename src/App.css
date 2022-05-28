@@ -1,0 +1,55 @@
+@import 'animate.css';
+
+@tailwind base;
+
+@layer base {
+  body {
+    @apply font-roboto;
+  }
+}
+
+@tailwind components;
+
+@layer components {
+  /*Mobile*/
+  .nav {
+    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-0 my-2
+  }
+
+  .nav-item {
+    @apply w-full h-full border-t-2 border-r-2 col-span-1 flex justify-center items-center
+  }
+
+  /*Browser*/
+  .header {
+    @apply w-full h-[10vh] flex justify-between gap-4 p-4 items-center shadow-lg;
+  }
+
+  .logo {
+    @apply h-[6vmin] pointer-events-none mx-4;
+  }
+
+  .tabActive {
+    @apply font-bold animate__bounceIn underline
+  }
+
+  .quantity {
+    @apply flex justify-center items-center absolute top-1 right-0 w-[1.5rem] h-[1.5rem] rounded-full text-white bg-red-600
+  }
+
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: logo-spin infinite 5s linear;
+  }
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
