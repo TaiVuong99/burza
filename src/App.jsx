@@ -13,20 +13,27 @@ function App() {
     <>
       <BrowserView className="App">
         <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/cart" element={<Cart />} />
+
+          <Route path="*" element={<Home />} />
+        </Routes>
       </BrowserView>
 
       <MobileView className="App">
         <Nav />
+        {/* <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/cart" element={<Cart />} />
+
+          <Route path="*" element={<Home />} />
+        </Routes> */}
       </MobileView>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/cart" element={<Cart />} />
-
-        <Route path="*" element={<Home/>}/>
-      </Routes>
     </>
   );
 }

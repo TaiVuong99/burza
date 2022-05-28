@@ -9,6 +9,9 @@ module.exports = {
       },
       colors: {
         primary: 'rgb(6, 182, 212)'
+      },
+      backgroundImage: {
+        'banner': "url('/src/assets/banner2.jpg')",
       }
     },
   },

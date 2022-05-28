@@ -10,11 +10,11 @@ function Header() {
     <header className="header">
       <div className="flex justify-center items-center mr-4 ">
         <img src={logo} alt="logo" className="logo" />
-        <div className="text-5xl font-bold text-primary cursor-pointer capitalize" onClick={() => {navigate("/")}}>Quick Quick Food</div>
+        <div className="text-4xl font-bold text-primary cursor-pointer uppercase" onClick={() => {navigate("/")}}>BURZA</div>
       </div>
 
       <div className="flex justify-around">
-        <div className="flex gap-10 justify-center items-center text-2xl font-light pr-4 border-r-2">
+        <div className="flex gap-10 justify-center items-center text-xl font-light pr-4 border-r-2">
           <NavLink
             to="/"
             className={({ isActive }) => (isActive ? "tabActive" : "")}
@@ -36,7 +36,7 @@ function Header() {
         </div>
 
         <div className="flex justify-center items-center p-3 relative">
-          <NavLink to="/Cart" className="text-3xl">
+          <NavLink to="/Cart" className="text-2xl">
             {({ isActive }) =>
               isActive ? <RiShoppingCart2Fill className="animate__bounceIn"/> : <RiShoppingCart2Line />
             }

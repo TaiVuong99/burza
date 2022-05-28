@@ -13,16 +13,16 @@
 @layer components {
   /*Mobile*/
   .nav {
-    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-0 my-2
+    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-0 my-2  border-t-2
   }
 
   .nav-item {
-    @apply w-full h-full border-t-2 border-r-2 col-span-1 flex justify-center items-center
+    @apply w-full h-full border-r-2 col-span-1 flex justify-center items-center
   }
 
   /*Browser*/
   .header {
-    @apply w-full h-[10vh] flex justify-between gap-4 p-4 items-center shadow-lg;
+    @apply w-full h-[10vh] flex justify-between gap-4 p-4 items-center shadow-lg fixed top-0 left-0 bg-white z-50
   }
 
   .logo {
@@ -34,7 +34,11 @@
   }
 
   .quantity {
-    @apply flex justify-center items-center absolute top-1 right-0 w-[1.5rem] h-[1.5rem] rounded-full text-white bg-red-600
+    @apply flex justify-center items-center absolute top-1 right-0 w-[1.25rem] h-[1.25rem] rounded-full text-white bg-red-600
+  }
+
+  .btn-banner {
+    @apply flex justify-center items-center gap-2 mt-8 p-4 border-2 text-xl rounded-lg hover:opacity-50
   }
 
 }

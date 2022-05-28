@@ -1,9 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { RiMenuAddFill, RiShoppingCart2Fill, RiShoppingCart2Line } from "react-icons/ri";
+import { RiShoppingCart2Fill, RiShoppingCart2Line } from "react-icons/ri";
 import { AiFillHome, AiOutlineHome } from "react-icons/ai";
-import { BiMenu } from "react-icons/bi";
-import {MdManageAccounts, MdOutlineManageAccounts} from "react-icons/md"
+import { BiFoodMenu } from "react-icons/bi";
+import {
+  MdMenuBook,
+  MdManageAccounts,
+  MdOutlineManageAccounts,
+} from "react-icons/md";
 
 function Nav(props) {
   return (
@@ -28,12 +32,12 @@ function Nav(props) {
         {({ isActive }) =>
           isActive ? (
             <span className="flex flex-col justify-center items-center">
-              <BiMenu />
+              <MdMenuBook />
               Menu
             </span>
           ) : (
             <span className="flex flex-col justify-center items-center">
-              <RiMenuAddFill />
+              <BiFoodMenu />
               Menu
             </span>
           )
@@ -41,7 +45,7 @@ function Nav(props) {
       </NavLink>
 
       <NavLink to="/cart" className="nav-item">
-      {({ isActive }) =>
+        {({ isActive }) =>
           isActive ? (
             <span className="flex flex-col justify-center items-center">
               <RiShoppingCart2Fill />
@@ -57,7 +61,7 @@ function Nav(props) {
       </NavLink>
 
       <NavLink to="/account" className="nav-item">
-      {({ isActive }) =>
+        {({ isActive }) =>
           isActive ? (
             <span className="flex flex-col justify-center items-center">
               <MdManageAccounts />
