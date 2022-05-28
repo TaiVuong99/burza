@@ -17,7 +17,7 @@
   }
 
   .nav-item {
-    @apply w-full h-full border-r-2 col-span-1 flex justify-center items-center
+    @apply w-full h-full border-r-2 col-span-1 flex justify-center items-center py-2
   }
 
   /*Browser*/
@@ -37,8 +37,13 @@
     @apply flex justify-center items-center absolute top-1 right-0 w-[1.25rem] h-[1.25rem] rounded-full text-white bg-red-600
   }
 
+  /*Banner*/
+  .banner {
+    @apply w-full text-white absolute top-1/2 p-4 text-6xl uppercase flex flex-col justify-center items-center animate__backInLeft
+  }
+
   .btn-banner {
-    @apply flex justify-center items-center gap-2 mt-8 p-4 border-2 text-xl rounded-lg hover:opacity-50
+    @apply flex justify-center items-center gap-2 mt-8 p-4 border-2 text-xl rounded-lg hover:animate-pulse
   }
 
 }
