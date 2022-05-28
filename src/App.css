@@ -13,11 +13,11 @@
 @layer components {
   /*Mobile*/
   .nav {
-    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-0.5 left-0 mb-2 border-t-[1px]
+    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-0 left-0 mb-2 border-t-[1px]
   }
 
   .nav-item {
-    @apply w-full h-full border-r-[1px] col-span-1 flex justify-center items-center pt-2
+    @apply w-full h-full col-span-1 flex justify-center items-center py-2
   }
 
   /*Browser*/
