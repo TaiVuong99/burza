@@ -13,7 +13,7 @@
 @layer components {
   /*Mobile*/
   .nav {
-    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-1 border-t-[1px]
+    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-2 border-t-[1px]
   }
 
   .nav-item {
