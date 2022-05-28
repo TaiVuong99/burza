@@ -39,7 +39,7 @@
 
   /*Banner*/
   .banner {
-    @apply w-full text-white absolute top-1/2 p-4 text-6xl uppercase flex flex-col justify-center items-center animate__backInLeft
+    @apply w-full text-white absolute top-1/2 p-4 text-6xl uppercase flex flex-col justify-center items-center animate__animated animate__bounceInLeft
   }
 
   .btn-banner {
