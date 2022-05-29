@@ -4,8 +4,9 @@ function AboutUs(props) {
   return (
     <div className="w-full h-[50vh] px-80 pt-10 flex flex-col items-center">
       <div className="text-4xl font-light uppercase">
-        <span className="mb-2 border-b-2 border-red-500">about</span> us
+        <span className="mb-2 border-b-2 border-red-500 font-medium">about</span> us
       </div>
+      
       <div className="text-justify pt-4">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit qui
         quidem consequuntur quos assumenda voluptatum voluptate harum!

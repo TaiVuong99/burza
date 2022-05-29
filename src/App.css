@@ -1,4 +1,4 @@
-@import 'animate.css';
+@import "animate.css";
 
 @tailwind base;
 
@@ -13,16 +13,16 @@
 @layer components {
   /*Mobile*/
   .nav {
-    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-2 border-t-[1px]
+    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-2 border-t-[1px];
   }
 
   .nav-item {
-    @apply w-full h-full col-span-1 flex justify-center items-center py-1
+    @apply w-full h-full col-span-1 flex justify-center items-center py-1;
   }
 
   /*Browser*/
   .header {
-    @apply w-full h-[10vh] flex justify-between gap-4 p-4 items-center shadow-lg fixed top-0 left-0 bg-white z-50
+    @apply w-full h-[10vh] flex justify-between gap-4 p-4 items-center shadow-lg fixed top-0 left-0 bg-white z-50;
   }
 
   .logo {
@@ -30,22 +30,34 @@
   }
 
   .tabActive {
-    @apply font-bold animate__bounceIn underline
+    @apply font-bold animate__bounceIn underline;
   }
 
   .quantity {
-    @apply flex justify-center items-center absolute top-1 right-0 w-[1.25rem] h-[1.25rem] rounded-full text-white bg-red-600
+    @apply flex justify-center items-center absolute top-1 right-0 w-[1.25rem] h-[1.25rem] rounded-full text-white bg-red-600;
   }
 
   /*Banner*/
   .banner {
-    @apply w-full text-white absolute top-1/2 p-4 text-6xl uppercase flex flex-col justify-center items-center animate__animated animate__bounceInLeft
+    @apply w-full text-white absolute top-1/2 p-4 text-6xl uppercase flex flex-col justify-center items-center animate__animated animate__bounceInLeft;
   }
 
   .btn-banner {
-    @apply flex justify-center items-center gap-2 mt-8 p-4 border-2 text-xl rounded-lg hover:animate-pulse
+    @apply flex justify-center items-center gap-2 mt-8 p-4 border-2 text-xl rounded-lg hover:animate-pulse;
   }
 
+  /*Our service*/
+  .col-container {
+    @apply col-span-1 flex flex-col items-center justify-center hover:opacity-60;
+  }
+
+  .icon {
+    @apply text-2xl w-14 h-14 border-2 rounded-full flex items-center justify-center;
+  }
+
+  .icon-description {
+    @apply text-justify mt-4 text-xl capitalize;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

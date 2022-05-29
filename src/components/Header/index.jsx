@@ -10,7 +10,13 @@ function Header() {
     <header className="header">
       <div className="flex justify-center items-center mr-4 ">
         <img src={logo} alt="logo" className="logo" />
-        <div className="text-4xl font-bold text-primary cursor-pointer uppercase" onClick={() => {navigate("/")}}>BURZA</div>
+        <div className="text-4xl font-bold text-primary cursor-pointer uppercase" onClick={() => {navigate("/")}}>
+          <span className="text-red-600">B</span>
+          <span className="text-yellow-400">U</span>
+          <span className="text-lime-500">R</span>
+          <span className="text-primary">Z</span>
+          <span className="text-violet-800">A</span>
+        </div>
       </div>
 
       <div className="flex justify-around">

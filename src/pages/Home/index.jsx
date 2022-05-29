@@ -7,11 +7,13 @@ import {
 } from "react-device-detect";
 import AboutUs from "./components/AboutUs";
 import Banner from "./components/Banner";
+import OurService from "./components/OurService";
 
 function Home(props) {
   return (
     <>
       <Banner />
+      <OurService/>
       <AboutUs />
     </>
     // <div>
