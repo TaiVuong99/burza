@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 
-function AboutUs(props) {
+function AboutUs() {
+  const aboutRef = useRef();
+  
+  const onScroll = () => {
+      const topRect = aboutRef.current.getBoundingClientRect().top;
+      const scrollPos = window.scrollY + window.innerHeight
+    
+      if(topRect*1.5 <= scrollPos) aboutRef.current.classList.add('about-active');
+      else {
+        aboutRef.current.classList.remove('about-active');
+      }
+  }
+
+  useLayoutEffect(() => {
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <div className="w-full h-[50vh] px-80 pt-10 flex flex-col items-center">
+    <div ref={aboutRef} className="w-full h-[50vh] px-80 pt-10 flex flex-col items-center">
       <div className="text-4xl font-light uppercase">
         <span className="mb-2 border-b-2 border-red-500 font-medium">about</span> us
       </div>

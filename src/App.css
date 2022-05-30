@@ -58,6 +58,15 @@
   .icon-description {
     @apply text-justify mt-4 text-xl capitalize;
   }
+
+  .service-active {
+    @apply animate__animated animate__slideInRight;
+  }
+
+  /*About us*/
+  .about-active {
+    @apply animate__animated animate__slideInRight;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
