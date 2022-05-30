@@ -12,8 +12,12 @@
 
 @layer components {
   /*Mobile*/
+  .mobile-content {
+    @apply w-full h-auto my-[5vh]
+  }
+
   .nav {
-    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-2 border-t-[1px];
+    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-0 border-t-[1px] bg-white;
   }
 
   .nav-item {
@@ -22,7 +26,7 @@
 
   /*Browser*/
   .header {
-    @apply w-full h-[10vh] flex justify-between gap-4 p-4 items-center shadow-lg fixed top-0 left-0 bg-white z-50;
+    @apply w-full h-[5vh] flex justify-center items-center shadow-lg fixed top-0 left-0 bg-white z-50 lg:h-[10vh] xl:justify-between lg:p-4;
   }
 
   .footer {
@@ -34,7 +38,7 @@
   }
 
   .logo {
-    @apply h-[6vmin] pointer-events-none mx-4;
+    @apply pointer-events-none h-[6vmin] md:h-[5vmin] lg:mx-4;
   }
 
   .tabActive {
@@ -46,11 +50,11 @@
   }
 
   .section {
-    @apply w-full h-auto px-40 mt-10 flex flex-col items-center gap-10
+    @apply w-full h-auto flex flex-col items-center gap-5 px-10 mt-5 md:px-20 md:mt-10 lg:gap-10 lg:px-40 
   }
 
   .section-title {
-    @apply text-4xl font-light uppercase;
+    @apply text-lg md:text-2xl lg:text-4xl font-light uppercase;
   }
 
   .first-title {
@@ -58,7 +62,7 @@
   }
 
   .section-content {
-    @apply grid w-full h-full gap-4
+    @apply grid w-full h-full gap-2 gap-y-4 md:gap-4
   }
 
   .col-container {
@@ -70,7 +74,7 @@
   }
 
   .bg-text {
-    @apply w-full h-full hidden justify-center items-center text-white text-4xl uppercase cursor-pointer 
+    @apply w-full h-full flex justify-center items-center text-white bg-black/80 uppercase cursor-pointer md:text-2xl xl:hidden xl:text-4xl
   }
 
   .bg-img:hover .bg-text {
@@ -79,20 +83,20 @@
 
   /*Banner*/
   .banner {
-    @apply w-full text-white absolute top-1/2 p-4 text-6xl uppercase flex flex-col justify-center items-center animate__animated animate__bounceInLeft;
+    @apply w-full text-white absolute top-1/2 p-4 uppercase flex flex-col justify-center items-center animate__animated animate__bounceInLeft text-2xl md:text-5xl lg:text-6xl;
   }
 
   .btn-banner {
-    @apply flex justify-center items-center gap-2 mt-8 p-4 border-2 text-xl rounded-lg hover:animate-pulse;
+    @apply flex justify-center items-center gap-2 border-[1px] mt-2 px-2 py-1 text-base rounded-md md:border-2 md:mt-8 md:p-4 md:text-xl md:rounded-lg lg:hover:animate-pulse;
   }
 
   /*Our service*/
   .icon {
-    @apply text-2xl w-14 h-14 border-2 rounded-full flex items-center justify-center;
+    @apply text-lg w-10 h-10 border-2 md:text-2xl md:w-14 md:h-14 rounded-full flex items-center justify-center;
   }
 
   .icon-description {
-    @apply text-justify mt-4 text-xl capitalize;
+    @apply mt-2 text-xs md:text-justify md:mt-4 md:text-xl capitalize;
   }
 
   .service-active {

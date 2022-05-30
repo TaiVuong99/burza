@@ -9,7 +9,7 @@ import {
   MdOutlineManageAccounts,
 } from "react-icons/md";
 
-function Nav(props) {
+function FooterMobile() {
   return (
     <nav className="nav">
       <NavLink to="/" className="nav-item">
@@ -79,4 +79,4 @@ function Nav(props) {
   );
 }
 
-export default Nav;
+export default FooterMobile;

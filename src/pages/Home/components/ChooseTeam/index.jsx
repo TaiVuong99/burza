@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { isBrowser } from "react-device-detect";
 
 function ChooseTeam() {
   const chooseRef = useRef();
@@ -15,12 +16,12 @@ function ChooseTeam() {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
+    if(isBrowser) window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <div ref={chooseRef} className="section h-[70vh]">
+    <div ref={chooseRef} className="section h-[30vh] lg:h-[70vh]">
       <div className="section-title">
         <span className="first-title">choose</span> your team
       </div>

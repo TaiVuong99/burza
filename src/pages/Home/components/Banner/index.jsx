@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Banner() {
   const navigate = useNavigate();
   return (
-    <div className="w-full h-screen mt-[10vh] relative">
+    <div className="w-full h-[50vh] mt-[5vh] relative lg:h-screen lg:mt-[10vh]">
       <div className="bg-img bg-banner blur-[2px]" />
 
       <div className="banner">

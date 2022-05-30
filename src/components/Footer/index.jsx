@@ -61,8 +61,8 @@ function Footer() {
         </div>
       </div>
 
-      <div className="text-center my-1 text-lg text-gray-500 font-bold">
-        © Burza 2022 
+      <div className="text-center my-1 text-lg text-gray-700">
+        © Burza 2022 | Owned by <a href="https://github.com/TaiVuong99/burza" target="_blank" className="font-bold text-violet-800 hover:underline">Michael Wang</a>
       </div>
     </footer>
   );
