@@ -17,7 +17,7 @@
   }
 
   .nav {
-    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-0 border-t-[1px] bg-white;
+    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-1 border-t-[1px] bg-white z-[999];
   }
 
   .nav-item {
@@ -83,7 +83,7 @@
 
   /*Banner*/
   .banner {
-    @apply w-full text-white absolute top-1/2 p-4 uppercase flex flex-col justify-center items-center animate__animated animate__bounceInLeft text-2xl md:text-5xl lg:text-6xl;
+    @apply w-full text-white absolute top-1/2 p-4 uppercase flex flex-col justify-center items-center animate__animated animate__bounceInLeft text-xl md:text-4xl lg:text-6xl;
   }
 
   .btn-banner {
