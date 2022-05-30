@@ -13,11 +13,11 @@
 @layer components {
   /*Mobile*/
   .mobile-content {
-    @apply w-full h-auto my-[5vh]
+    @apply w-full h-auto mt-[5vh] mb-[7vh]
   }
 
   .nav {
-    @apply w-full h-[5vh] grid grid-cols-4 gap-2 fixed bottom-1 border-t-[1px] bg-white z-[999];
+    @apply w-full h-[7vh] grid grid-cols-4 gap-2 fixed bottom-0 border-t-[1px] bg-white z-50;
   }
 
   .nav-item {
