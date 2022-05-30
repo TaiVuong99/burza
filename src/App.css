@@ -25,6 +25,14 @@
     @apply w-full h-[10vh] flex justify-between gap-4 p-4 items-center shadow-lg fixed top-0 left-0 bg-white z-50;
   }
 
+  .footer {
+    @apply mt-10 w-full h-[30vh] grid grid-cols-3 bg-black text-white
+  }
+
+  .footer-title {
+    @apply text-xl uppercase cursor-pointer hover:opacity-50
+  }
+
   .logo {
     @apply h-[6vmin] pointer-events-none mx-4;
   }
@@ -37,6 +45,38 @@
     @apply flex justify-center items-center absolute top-1 right-0 w-[1.25rem] h-[1.25rem] rounded-full text-white bg-red-600;
   }
 
+  .section {
+    @apply w-full h-auto px-40 mt-10 flex flex-col items-center gap-10
+  }
+
+  .section-title {
+    @apply text-4xl font-light uppercase;
+  }
+
+  .first-title {
+    @apply mb-2 border-b-2 border-red-500 font-medium
+  }
+
+  .section-content {
+    @apply grid w-full h-full gap-4
+  }
+
+  .col-container {
+    @apply col-span-1 flex flex-col items-center justify-center text-justify;
+  }
+
+  .bg-img {
+    @apply w-full h-full bg-center bg-cover bg-no-repeat
+  }
+
+  .bg-text {
+    @apply w-full h-full hidden justify-center items-center text-white text-4xl uppercase cursor-pointer 
+  }
+
+  .bg-img:hover .bg-text {
+    @apply flex bg-black/80 
+  }
+
   /*Banner*/
   .banner {
     @apply w-full text-white absolute top-1/2 p-4 text-6xl uppercase flex flex-col justify-center items-center animate__animated animate__bounceInLeft;
@@ -47,10 +87,6 @@
   }
 
   /*Our service*/
-  .col-container {
-    @apply col-span-1 flex flex-col items-center justify-center hover:opacity-60;
-  }
-
   .icon {
     @apply text-2xl w-14 h-14 border-2 rounded-full flex items-center justify-center;
   }
@@ -66,6 +102,11 @@
   /*About us*/
   .about-active {
     @apply animate__animated animate__slideInRight;
+  }
+
+  /*Choose team*/
+  .choose-active {
+    @apply animate__animated animate__zoomInDown;
   }
 }
 

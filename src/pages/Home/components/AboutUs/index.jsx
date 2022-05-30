@@ -1,43 +1,44 @@
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 function AboutUs() {
   const aboutRef = useRef();
-  
-  const onScroll = () => {
-      const topRect = aboutRef.current.getBoundingClientRect().top;
-      const scrollPos = window.scrollY + window.innerHeight
-    
-      if(topRect*1.5 <= scrollPos) aboutRef.current.classList.add('about-active');
-      else {
-        aboutRef.current.classList.remove('about-active');
-      }
-  }
 
-  useLayoutEffect(() => {
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const onScroll = () => {
+    const topRect = aboutRef.current.getBoundingClientRect().top;
+    const scrollPos = window.scrollY + window.innerHeight;
+
+    if (topRect * 1.5 <= scrollPos)
+      aboutRef.current.classList.add("about-active");
+    else {
+      aboutRef.current.classList.remove("about-active");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <div ref={aboutRef} className="w-full h-[50vh] px-80 pt-10 flex flex-col items-center">
-      <div className="text-4xl font-light uppercase">
-        <span className="mb-2 border-b-2 border-red-500 font-medium">about</span> us
+    <div ref={aboutRef} className="section">
+      <div className="section-title">
+        <span className="first-title">about</span> us
       </div>
-      
-      <div className="text-justify pt-4">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit qui
-        quidem consequuntur quos assumenda voluptatum voluptate harum!
-        Doloremque consequatur nulla, sunt ea repellat odio error dicta. Iste
-        illum sint dolorum. Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Eos sed, modi error, provident iste nulla sapiente earum, a natus
-        accusantium est corporis explicabo voluptatibus reiciendis. Possimus
-        omnis similique itaque obcaecati?Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Laudantium ratione ducimus nulla. Aspernatur quibusdam
-        maxime est! Laboriosam accusantium dolores ab natus ullam sint modi
-        provident debitis sit assumenda? Exercitationem, modi!Lorem Lorem ipsum,
-        dolor sit amet consectetur adipisicing elit. Eaque, aperiam sunt odit
-        tenetur qui reiciendis harum id, obcaecati unde nostrum voluptatibus
-        soluta expedita animi nisi quasi velit, veniam blanditiis maxime.
+
+      <div className="section-content grid-cols-1">
+        <div className="col-container justify-start md:text-lg">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime alias
+          asperiores necessitatibus sit unde. Mollitia dolore autem error
+          placeat! Ut aut expedita eveniet quisquam accusamus recusandae aliquam
+          pariatur commodi excepturi. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Saepe, fugiat recusandae repellat dolores dolorem ad
+          ipsam corrupti consequatur! Hic in recusandae libero maxime
+          consequatur quos deserunt! A perferendis nobis animi. Lorem ipsum
+          dolor sit amet consectetur adipisicing elit. Repellat adipisci laborum
+          similique dolorem ab tempore, velit ad et reiciendis vitae id,
+          voluptate asperiores autem. Possimus, suscipit beatae! Reiciendis,
+          sequi dolores!
+        </div>
       </div>
     </div>
   );

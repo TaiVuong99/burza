@@ -2,6 +2,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import Menu from "./pages/Menu";
 import Account from "./pages/Account";
@@ -21,6 +22,7 @@ function App() {
 
           <Route path="*" element={<Home />} />
         </Routes>
+        <Footer />
       </BrowserView>
 
       <MobileView className="App">

@@ -6,7 +6,7 @@ function Banner() {
   const navigate = useNavigate();
   return (
     <div className="w-full h-screen mt-[10vh] relative">
-      <div className="w-full h-full bg-center bg-cover bg-no-repeat bg-banner blur-[2px]" />
+      <div className="bg-img bg-banner blur-[2px]" />
 
       <div className="banner">
         choose your favorite food

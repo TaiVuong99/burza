@@ -7,6 +7,7 @@ import {
 } from "react-device-detect";
 import AboutUs from "./components/AboutUs";
 import Banner from "./components/Banner";
+import ChooseTeam from "./components/ChooseTeam";
 import OurService from "./components/OurService";
 
 function Home(props) {
@@ -15,6 +16,7 @@ function Home(props) {
       <Banner />
       <OurService/>
       <AboutUs />
+      <ChooseTeam />
     </>
     // <div>
     //   <BrowserView>

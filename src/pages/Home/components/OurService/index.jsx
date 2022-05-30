@@ -1,38 +1,35 @@
-import React, { useEffect, useLayoutEffect, useRef } from "react";
-import { IoFastFood } from "react-icons/io5";
-import { AiFillThunderbolt, AiFillHeart } from "react-icons/ai";
+import React, { useEffect, useRef } from "react";
+import { AiFillHeart, AiFillThunderbolt } from "react-icons/ai";
 import { GiReceiveMoney } from "react-icons/gi";
+import { IoFastFood } from "react-icons/io5";
 
 function OurService() {
   const serviceRef = useRef();
-  
+
   const onScroll = () => {
-      const topRect = serviceRef.current.getBoundingClientRect().top;
-      const scrollPos = window.scrollY + window.innerHeight
-    
-      if(topRect*1.5 <= scrollPos) serviceRef.current.classList.add('service-active');
-      else {
-        serviceRef.current.classList.remove('service-active');
-      }
-  }
+    const topRect = serviceRef.current.getBoundingClientRect().top;
+    const scrollPos = window.scrollY + window.innerHeight;
+
+    if (topRect * 1.5 <= scrollPos)
+      serviceRef.current.classList.add("service-active");
+    else {
+      serviceRef.current.classList.remove("service-active");
+    }
+  };
 
   useEffect(() => {
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <div
-      ref={serviceRef}
-      className="w-full h-[50vh] px-40 pt-10 flex flex-col items-center"
-    >
-      <div className="text-4xl font-light uppercase">
-        <span className="mb-2 border-b-2 border-red-500 font-medium">Our</span>{" "}
-        service
+    <div ref={serviceRef} className="section h-[40vh]">
+      <div className="section-title">
+        <span className="first-title">Our</span> service
       </div>
 
-      <div className="grid grid-cols-4 w-full h-full mt-4">
-        <div className="col-container">
+      <div className="section-content grid-cols-4">
+        <div className="col-container  hover:opacity-60">
           <div className="icon text-lime-500 border-lime-500">
             <IoFastFood />
           </div>
@@ -42,7 +39,7 @@ function OurService() {
           </div>
         </div>
 
-        <div className="col-container">
+        <div className="col-container hover:opacity-60">
           <div className="icon text-red-600 border-red-600">
             <AiFillHeart />
           </div>
@@ -50,7 +47,7 @@ function OurService() {
           <div className="icon-description text-red-600">favorite store</div>
         </div>
 
-        <div className="col-container">
+        <div className="col-container hover:opacity-60">
           <div className="icon text-primary border-primary">
             <GiReceiveMoney />
           </div>
@@ -58,7 +55,7 @@ function OurService() {
           <div className="icon-description text-primary">good price</div>
         </div>
 
-        <div className="col-container">
+        <div className="col-container hover:opacity-60">
           <div className="icon text-yellow-400 border-yellow-400">
             <AiFillThunderbolt />
           </div>
