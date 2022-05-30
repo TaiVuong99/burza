@@ -50,11 +50,11 @@
   }
 
   .section {
-    @apply w-full h-auto flex flex-col items-center gap-2 px-10 mt-5 md:px-20 md:mt-10 lg:gap-10 lg:px-40 
+    @apply w-full h-auto flex flex-col items-center px-10 mt-5 md:px-20 md:mt-10 lg:gap-10 lg:px-40 
   }
 
   .section-title {
-    @apply text-lg md:text-2xl lg:text-4xl font-light uppercase;
+    @apply text-lg mb-2 md:text-2xl lg:text-4xl font-light uppercase;
   }
 
   .first-title {
