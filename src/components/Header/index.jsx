@@ -35,7 +35,7 @@ function Header() {
             Home
           </NavLink>
           <NavLink
-            to="/Menu"
+            to="menu"
             className={({ isActive }) =>
               isActive ? "tabActive" : "hover:font-bold"
             }
@@ -43,7 +43,7 @@ function Header() {
             Menu
           </NavLink>
           <NavLink
-            to="/Account"
+            to="account"
             className={({ isActive }) =>
               isActive ? "tabActive" : "hover:font-bold"
             }
@@ -53,7 +53,7 @@ function Header() {
         </div>
 
         <div className="flex justify-center items-center p-3 relative">
-          <NavLink to="/Cart" className="text-2xl">
+          <NavLink to="cart" className="text-2xl">
             {({ isActive }) =>
               isActive ? (
                 <RiShoppingCart2Fill className="animate__bounceIn" />

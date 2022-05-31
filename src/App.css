@@ -13,7 +13,7 @@
 @layer components {
   /*Mobile*/
   .mobile-content {
-    @apply w-full h-auto mt-[5vh] mb-[7vh]
+    @apply w-full h-auto mt-[5vh] mb-[7vh];
   }
 
   .nav {
@@ -30,11 +30,11 @@
   }
 
   .footer {
-    @apply mt-10 w-full h-[30vh] grid grid-cols-3 bg-black text-white
+    @apply mt-10 w-full h-[30vh] grid grid-cols-3 bg-black text-white;
   }
 
   .footer-title {
-    @apply text-xl uppercase cursor-pointer hover:opacity-50
+    @apply text-xl uppercase cursor-pointer hover:opacity-50;
   }
 
   .logo {
@@ -49,8 +49,9 @@
     @apply flex justify-center items-center absolute top-1 right-0 w-[1.25rem] h-[1.25rem] rounded-full text-white bg-red-600;
   }
 
+  /*Section*/
   .section {
-    @apply w-full h-auto flex flex-col items-center px-10 mt-5 md:px-20 md:mt-10 lg:gap-10 lg:px-40 
+    @apply w-full h-auto flex flex-col items-center px-10 mt-5 md:px-20 md:mt-10 lg:gap-10 lg:px-40;
   }
 
   .section-title {
@@ -58,27 +59,28 @@
   }
 
   .first-title {
-    @apply mb-2 border-b-2 border-red-500 font-medium
+    @apply mb-2 border-b-2 border-red-500 font-medium;
   }
 
   .section-content {
-    @apply grid w-full h-full gap-2 gap-y-4 md:gap-4
+    @apply grid w-full h-full gap-2 gap-y-4 md:gap-4;
   }
 
   .col-container {
     @apply col-span-1 flex flex-col items-center justify-center text-justify;
   }
 
+  /*Image*/
   .bg-img {
-    @apply w-full h-full bg-center bg-cover bg-no-repeat
+    @apply w-full h-full bg-center bg-cover bg-no-repeat;
   }
 
   .bg-text {
-    @apply w-full h-full flex justify-center items-center text-white bg-black/80 uppercase cursor-pointer md:text-2xl xl:hidden xl:text-4xl
+    @apply w-full h-full flex justify-center items-center text-white bg-black/80 uppercase cursor-pointer md:text-2xl xl:hidden xl:text-4xl;
   }
 
   .bg-img:hover .bg-text {
-    @apply flex bg-black/80 
+    @apply flex bg-black/80;
   }
 
   /*Banner*/
@@ -87,7 +89,7 @@
   }
 
   .btn-banner {
-    @apply flex justify-center items-center gap-2 border-[1px] mt-2 px-2 py-1 text-base rounded-md md:border-2 md:mt-8 md:p-4 md:text-xl md:rounded-lg lg:hover:animate-pulse;
+    @apply flex justify-center items-center gap-2 border-[1px] mt-2 px-2 py-1 text-base rounded-md hover:animate-pulse md:border-2 md:mt-8 md:p-4 md:text-xl md:rounded-lg;
   }
 
   /*Our service*/
@@ -111,6 +113,28 @@
   /*Choose team*/
   .choose-active {
     @apply animate__animated animate__zoomInDown;
+  }
+
+  /*Menu*/
+  .nav-menu {
+    @apply p-4 flex justify-evenly items-center text-xl mb-4 font-light border-2 rounded-full uppercase;
+  }
+
+  .menu {
+    @apply hover:font-bold;
+  }
+
+  .menu-active {
+    @apply font-bold;
+  }
+
+  /*Product*/
+  .products {
+    @apply w-full h-full grid grid-cols-4 gap-4
+  }
+
+  .product {
+    @apply flex flex-col gap-4
   }
 }
 

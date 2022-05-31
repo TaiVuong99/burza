@@ -23,7 +23,7 @@ function OurService() {
   }, []);
 
   return (
-    <div ref={serviceRef} className="section xl:h-[40vh]">
+    <div ref={serviceRef} className="section h-[35vh] xl:h-[40vh]">
       <div className="section-title">
         <span className="first-title">Our</span> service
       </div>

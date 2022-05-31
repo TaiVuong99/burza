@@ -1,0 +1,98 @@
+{
+    "products": [
+        {
+            "productId": 1,
+            "cateId": 1,
+            "productName": "Burger 1",
+            "price": 38,
+            "imageUrl": "http://www.nicdarkthemes.com/themes/restaurant/wp/demo/hamburger/wp-content/uploads/sites/7/2019/01/product-02-1.jpg",
+            "notes": ""
+        },
+        {
+            "productId": 2,
+            "cateId": 1,
+            "productName": "Burger 2",
+            "price": 32,
+            "imageUrl": "http://www.nicdarkthemes.com/themes/restaurant/wp/demo/hamburger/wp-content/uploads/sites/7/2019/01/product-01-1.jpg",
+            "notes": ""
+        },
+        {
+            "productId": 3,
+            "cateId": 1,
+            "productName": "Burger 3",
+            "price": 28,
+            "imageUrl": "http://www.nicdarkthemes.com/themes/restaurant/wp/demo/hamburger/wp-content/uploads/sites/7/2019/01/product-03-1.jpg",
+            "notes": ""
+        },
+        {
+            "productId": 4,
+            "cateId": 1,
+            "productName": "Burger 4",
+            "price": 18,
+            "imageUrl": "http://www.nicdarkthemes.com/themes/restaurant/wp/demo/hamburger/wp-content/uploads/sites/7/2019/01/product-04-1.jpg",
+            "notes": ""
+        },
+        {
+            "productId": 1,
+            "cateId": 2,
+            "productName": "Pizza 1",
+            "price": 38,
+            "imageUrl": "http://www.nicdarkthemes.com/themes/restaurant/wp/demo/pizza/wp-content/uploads/sites/3/2019/01/prod-01.jpg",
+            "notes": ""
+        },
+        {
+            "productId": 2,
+            "cateId": 2,
+            "productName": "Pizza 2",
+            "price": 32,
+            "imageUrl": "http://www.nicdarkthemes.com/themes/restaurant/wp/demo/pizza/wp-content/uploads/sites/3/2019/01/prod-02.jpg",
+            "notes": ""
+        },
+        {
+            "productId": 3,
+            "cateId": 2,
+            "productName": "Pizza 3",
+            "price": 28,
+            "imageUrl": "http://www.nicdarkthemes.com/themes/restaurant/wp/demo/pizza/wp-content/uploads/sites/3/2019/01/prod-03.jpg",
+            "notes": ""
+        },
+        {
+            "productId": 4,
+            "cateId": 2,
+            "productName": "Pizza 4",
+            "price": 18,
+            "imageUrl": "http://www.nicdarkthemes.com/themes/restaurant/wp/demo/pizza/wp-content/uploads/sites/3/2019/01/prod-04.jpg",
+            "notes": ""
+        }
+    ],
+
+    "cate": [
+        {
+            "cateId": 1,
+            "cateName": "Burger",
+            "numberOfProducts": 4
+        },
+        {
+            "cateId": 2,
+            "cateName": "Pizza",
+            "numberOfProducts": 4
+        }
+    ],
+    "cart": [
+
+    ],
+
+    "user": [
+        {
+            "userId": 1,
+            "userName": "0123",
+            "pass": "aaa",
+            "name": "test",
+            "address": "123A Q2 P5"
+        }
+    ],
+
+    "order": [
+        
+    ]
+}
