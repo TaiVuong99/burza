@@ -1,33 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
 
 ProductCate.propTypes = {
   list: PropTypes.array,
+  onProductClick: PropTypes.func,
 };
 
 ProductCate.defaultProps = {
   list: [],
+  onProductClick: null,
 };
 
 function ProductCate(props) {
-  const { list } = props;
+  const { list, onProductClick } = props;
+
+  const handleClick = (product) => {
+    if (onProductClick) onProductClick(product);
+  };
 
   return (
     <ul className="products">
       {list.map((product, index) => (
-        <li className="product" key={index}>
-          <img
-            src={product.imageUrl}
-            className="w-full h-auto overflow-hidden"
-          ></img>
-          <div className="flex flex-col">
-            <div className="flex justify-center gap-10">
-              <div>{product.productName}</div>
-              <div>${product.price}</div>
+        <li
+          className="product"
+          key={index}
+          onClick={() => handleClick(product)}
+        >
+          <div className="w-full h-full relative hover:opacity-80 cursor-pointer">
+            <img src={product.imageUrl} className="bg-img" />
+
+            <div className="absolute left-1/2 bottom-10 -translate-x-1/2 py-2 px-4 bg-white uppercase font-bold text-xl rounded-md">
+              {product.productName}
             </div>
 
-            <div></div>
+            <div className="price-img">${product.price}</div>
           </div>
         </li>
       ))}

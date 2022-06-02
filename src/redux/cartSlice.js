@@ -4,14 +4,42 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: [],
     reducers: {
-        // getProducts: () => {},
+        addCart: (state, action) => {
+            let indexExist = state.findIndex(
+                (product) => product.productId === action.payload.productId
+              );
+        
+              if (indexExist < 0) {
+                state.push(action.payload);
+              } else {
+                state[indexExist] = {
+                  ...state[indexExist],
+                  quantity: state[indexExist].quantity + action.payload.quantity,
+                };
+              }
+        },
 
-        // getProductsSuccess: (state, action) => {
-            
-        // }
+        updateCart: (state, action) => {
+            let indexExist = state.findIndex(
+              (product) => product.productId === action.payload.productId
+            );
+      
+            if (indexExist < 0) {
+              state.push(action.payload);
+            } else {
+              state[indexExist] = {
+                ...state[indexExist],
+                quantity: action.payload.quantity,
+              };
+            }
+          },
+      
+          deleteCart: (state, action) => {
+            return state.filter((product) => product.productId !== action.payload);
+          },
     }
 })
 
 const {actions, reducer} = cartSlice
-const {} = actions
+export const { addCart, updateCart, deleteCart } = actions
 export default reducer

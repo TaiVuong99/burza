@@ -1,11 +1,14 @@
 import React from "react";
 import { RiShoppingCart2Fill, RiShoppingCart2Line } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../logo.svg";
 
 function Header() {
   const navigate = useNavigate();
+  const cart = useSelector((state) => state.cart);
+
   return (
     <header className="header">
       <div className="flex justify-center items-center mr-4 ">
@@ -34,6 +37,7 @@ function Header() {
           >
             Home
           </NavLink>
+
           <NavLink
             to="menu"
             className={({ isActive }) =>
@@ -42,6 +46,7 @@ function Header() {
           >
             Menu
           </NavLink>
+
           <NavLink
             to="account"
             className={({ isActive }) =>
@@ -58,12 +63,12 @@ function Header() {
               isActive ? (
                 <RiShoppingCart2Fill className="animate__bounceIn" />
               ) : (
-                <RiShoppingCart2Line className="hover:opacity-50"/>
+                <RiShoppingCart2Line className="hover:opacity-50" />
               )
             }
           </NavLink>
 
-          <div className="quantity">1</div>
+          {cart.length > 0 && <div className="quantity">{cart.length}</div>}
         </div>
       </div>
     </header>

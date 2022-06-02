@@ -1,30 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import PropTypes from "prop-types";
+import { NavLink, useLocation } from "react-router-dom";
 
-NavMenu.propTypes = {
-  onNavClick: PropTypes.func,
-};
+function NavMenu() {
+  let location = useLocation();
+  if (location.pathname === "/menu") location.pathname = "/menu/all";
 
-NavMenu.defaultProps = {
-  onNavClick: null,
-};
-
-function NavMenu(props) {
-  const { onNavClick } = props;
   const cate = useSelector((state) => state.cate);
-
-  const handleClick = (nav) => {
-    if (onNavClick) onNavClick(nav.cateName);
-  };
 
   return (
     <ul className="nav-menu">
       <NavLink
         to="/menu/all"
         className={({ isActive }) => (isActive ? "menu-active" : "menu")}
-        onClick={handleClick}
       >
         All
       </NavLink>
@@ -34,7 +22,6 @@ function NavMenu(props) {
           key={index}
           to={`/menu/${item.cateName.toLowerCase()}`}
           className={({ isActive }) => (isActive ? "menu-active" : "menu")}
-          onClick={() => handleClick(item)}
         >
           {item.cateName}
         </NavLink>

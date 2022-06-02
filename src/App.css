@@ -89,7 +89,7 @@
   }
 
   .btn-banner {
-    @apply flex justify-center items-center gap-2 border-[1px] mt-2 px-2 py-1 text-base rounded-md hover:animate-pulse md:border-2 md:mt-8 md:p-4 md:text-xl md:rounded-lg;
+    @apply hover:animate-pulse flex justify-center items-center gap-2 border-[1px] mt-2 px-2 py-1 text-base rounded-md md:border-2 md:mt-8 md:p-4 md:text-xl md:rounded-lg;
   }
 
   /*Our service*/
@@ -116,6 +116,10 @@
   }
 
   /*Menu*/
+  #menu-container {
+    @apply w-full h-auto mt-[10vh] pt-10 px-40 relative
+  }
+
   .nav-menu {
     @apply p-4 flex justify-evenly items-center text-xl mb-4 font-light border-2 rounded-full uppercase;
   }
@@ -130,11 +134,40 @@
 
   /*Product*/
   .products {
-    @apply w-full h-full grid grid-cols-4 gap-4
+    @apply w-full h-full grid grid-cols-4 gap-4;
   }
 
   .product {
-    @apply flex flex-col gap-4
+    @apply flex flex-col gap-4;
+  }
+
+  .price-img {
+    @apply absolute top-5 right-5 p-2 text-white rounded-full
+  }
+
+  .product:nth-child(odd) .price-img {
+    @apply bg-red-600;
+  }
+
+  .product:nth-child(even) .price-img {
+    @apply bg-yellow-500;
+  }
+
+  /*Modal*/
+  .modal {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-2/3 bg-white cursor-auto flex flex-col p-4 rounded-lg gap-8;
+  }
+
+  .modal-overlay {
+    @apply fixed w-full h-full top-0 right-0 bottom-0 left-0 z-50 bg-slate-500/50 cursor-not-allowed
+  }
+
+  .btn-quantity {
+    @apply text-xl px-4 rounded-md text-white bg-green-500 cursor-pointer hover:opacity-80
+  }
+
+  .btn-add {
+    @apply flex justify-center items-center gap-2 text-white py-1 px-2 rounded-md hover:opacity-80 z-50
   }
 }
 

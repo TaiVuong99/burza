@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+
 import "./App.css";
+
 import Footer from "./components/Footer";
 import FooterMobile from "./components/FooterMobile";
 import Header from "./components/Header";
@@ -30,7 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
-          <Route path="menu" element={<Menu />} >
+          <Route path="menu" element={<Menu/>} >
             <Route path=":cate" element={<Menu />} >
               <Route path=":product" element={<Menu/>}/>
             </Route>
