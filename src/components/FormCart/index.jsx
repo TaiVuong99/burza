@@ -14,7 +14,7 @@ FormCart.defaultProps = {
   quantity: 1,
   onDecreaseClick: null,
   onIncreaseClick: null,
-  onSubmitClick: null
+  onSubmitClick: null,
 };
 
 function FormCart(props) {
@@ -25,10 +25,9 @@ function FormCart(props) {
       notes: "",
     },
     onSubmit: (values) => {
-      if(onSubmitClick) onSubmitClick(values)
+      if (onSubmitClick) onSubmitClick(values);
     },
   });
-
 
   const handleIncrease = () => {
     if (onIncreaseClick) onIncreaseClick();
@@ -38,9 +37,7 @@ function FormCart(props) {
     if (onDecreaseClick) onDecreaseClick();
   };
 
-
   return (
-
     <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
       <div>
         <label forhtml="notes" className="text-lg">
@@ -82,7 +79,11 @@ function FormCart(props) {
         </div>
 
         <div>
-          <button type="submit" className="btn-add" style={{backgroundColor: "#1D4ED8"}}>
+          <button
+            type="submit"
+            className="btn-add"
+            style={{ backgroundColor: "#1D4ED8" }}
+          >
             Add to cart <RiShoppingCart2Fill />
           </button>
         </div>

@@ -53,7 +53,7 @@ function ModalDetail(props) {
     hide();
     document.getElementById("menu-container").style.pointerEvents = "";
 
-    toast.success(`Add ${detail.productName} successfully!!!`, {
+    toast.success(`Add ${detail.productName} Successfully!!!`, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,

@@ -29,7 +29,7 @@ function ProductCate(props) {
           <div className="w-full h-full relative hover:opacity-80 cursor-pointer">
             <img src={product.imageUrl} className="bg-img" />
 
-            <div className="absolute left-1/2 bottom-10 -translate-x-1/2 py-2 px-4 bg-white uppercase font-bold text-xl rounded-md">
+            <div className="absolute left-1/2 bottom-10 -translate-x-1/2 py-2 px-4 bg-white uppercase font-bold text-lg rounded-md">
               {product.productName}
             </div>
 

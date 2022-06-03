@@ -46,7 +46,7 @@
   }
 
   .quantity {
-    @apply flex justify-center items-center absolute top-1 right-0 w-[1.25rem] h-[1.25rem] rounded-full text-white bg-red-600;
+    @apply text-sm flex justify-center items-center absolute top-1 right-0 w-[1.25rem] h-[1.25rem] rounded-full text-white bg-red-600;
   }
 
   /*Section*/
@@ -155,7 +155,7 @@
 
   /*Modal*/
   .modal {
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-2/3 bg-white cursor-auto flex flex-col p-4 rounded-lg gap-8;
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-auto bg-white cursor-auto flex flex-col p-4 rounded-lg gap-8;
   }
 
   .modal-overlay {
@@ -168,6 +168,51 @@
 
   .btn-add {
     @apply flex justify-center items-center gap-2 text-white py-1 px-2 rounded-md hover:opacity-80 z-50
+  }
+
+  .btn-del {
+    @apply flex justify-center items-center gap-2 bg-red-600 text-white py-1 px-2 rounded-md hover:opacity-80 z-50
+  }
+
+  /*Cart*/
+  .cart-container {
+    @apply w-full h-auto mt-[10vh] pt-10 px-20 grid grid-cols-3 gap-10
+  }
+
+  .list-container {
+    @apply col-span-2 h-auto
+  }
+
+  .list-product {
+    @apply flex flex-col gap-4 w-full h-auto
+  }
+  
+  .product-item {
+    @apply flex gap-8 border-2 p-2 shadow-md rounded-lg
+  }
+  
+  .product-item-info {
+    @apply w-full 
+  }
+
+  .bill-container {
+    @apply col-span-1 h-auto flex flex-col gap-8
+  }
+
+  .info-container {
+    @apply w-full border-2 p-2 flex flex-col shadow-lg gap-4
+  }
+
+  .info-title {
+    @apply text-xl font-bold capitalize
+  }
+
+  .info-price {
+    @apply font-medium flex justify-between items-center
+  }
+
+  .info-total {
+    @apply text-lg font-semibold flex justify-between items-center
   }
 }
 

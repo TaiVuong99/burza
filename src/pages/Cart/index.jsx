@@ -1,15 +1,32 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import Bill from "./components/Bill";
+import ListProduct from "./components/ListProduct";
 
-function Cart(props) {
-    const cart = useSelector(state => state.cart)
+function Cart() {
+  const cart = useSelector((state) => state.cart);
 
-    console.log(cart)
-    return (
-        <div>
-            
-        </div>
-    );
+  const handleRemove = () => {
+    console.log("go");
+  };
+  return (
+    <div className="cart-container">
+      {cart.length > 0 ? (
+        <>
+          <ListProduct onRemove={handleRemove} />
+          <Bill />
+        </>
+      ) : (
+        <>
+          <div className="col-span-3 text-xl font-bold text-center uppercase">
+            You don't have any product
+          </div>
+        </>
+      )}
+      <ToastContainer newestOnTop />
+    </div>
+  );
 }
 
 export default Cart;
