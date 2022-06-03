@@ -40,7 +40,7 @@ function FormCart(props) {
   return (
     <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
       <div>
-        <label forhtml="notes" className="text-lg">
+        <label htmlFor="notes" className="text-lg">
           Notes:
         </label>
         <textarea

@@ -7,14 +7,11 @@ import ListProduct from "./components/ListProduct";
 function Cart() {
   const cart = useSelector((state) => state.cart);
 
-  const handleRemove = () => {
-    console.log("go");
-  };
   return (
     <div className="cart-container">
       {cart.length > 0 ? (
         <>
-          <ListProduct onRemove={handleRemove} />
+          <ListProduct/>
           <Bill />
         </>
       ) : (

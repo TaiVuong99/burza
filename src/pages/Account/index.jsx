@@ -1,9 +1,10 @@
 import React from 'react';
+import FormLogin from './components/FormLogin';
 
-function Account(props) {
+function Account() {
     return (
-        <div>
-            Account
+        <div className='account-container'>
+            <FormLogin/>
         </div>
     );
 }

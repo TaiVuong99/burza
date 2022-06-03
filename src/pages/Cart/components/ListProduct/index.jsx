@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from 'prop-types';
 
 import { FaTrashAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,16 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCart, updateCart } from "../../../../redux/cartSlice";
 import { toast } from "react-toastify";
 
-ListProduct.propTypes = {
-  onRemove: PropTypes.func,
-};
-
-ListProduct.propTypes = {
-  onRemove: null,
-};
 
 function ListProduct(props) {
-  const {onRemove} = props
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
