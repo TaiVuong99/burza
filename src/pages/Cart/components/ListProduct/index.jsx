@@ -94,7 +94,7 @@ function ListProduct(props) {
                   />
                 </div>
 
-                <div className="flex justify-evenly">
+                <div className="flex justify-evenly py-2">
                   <div className="flex justify-around items-center gap-4">
                     <button
                       className="btn-quantity"

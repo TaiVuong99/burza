@@ -13,8 +13,10 @@ import Account from "./pages/Account";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
+
 import { getCate } from "./redux/cateSlice";
 import { getProducts } from "./redux/productSlice";
+import { getListUser } from "./redux/userSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ function App() {
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getCate())
+    dispatch(getListUser())
   }, []);
 
   return (
@@ -38,7 +41,9 @@ function App() {
             </Route>
           </Route>
 
-          <Route path="account" element={<Account />} />
+          <Route path="account" element={<Account />} >
+            <Route path=":status" element={<Account />} />
+            </Route>
           
           <Route path="cart" element={<Cart />} />
 

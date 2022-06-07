@@ -137,7 +137,7 @@
     @apply w-full h-auto mt-[10vh] pt-10 px-40 flex justify-center items-center;
   }
 
-  .form-login {
+  .form {
     @apply w-1/2 flex flex-col gap-8 rounded-lg border-2 shadow-lg px-4 py-10;
   }
 
@@ -146,7 +146,7 @@
   }
 
   .form-container {
-    @apply flex flex-col;
+    @apply w-full flex flex-col;
   }
 
   .form-input {
@@ -157,20 +157,32 @@
     @apply w-full p-2;
   }
 
+  .form-read {
+   @apply w-full p-2 bg-gray-300/20 cursor-default text-gray-600/40
+  }
+
   .form-error {
     @apply text-red-600;
   }
 
+  .form-nav {
+    @apply text-cyan-500 hover:underline
+  }
+
+  .form-show {
+    @apply cursor-pointer text-gray-500 text-xl hover:opacity-80
+  }
+
   .form-btn {
-    @apply w-full flex justify-evenly items-center
+    @apply py-2 px-4 rounded-md text-white font-bold hover:opacity-80;
   }
 
-  .btn-sign {
-    @apply py-2 px-4 rounded-md bg-green-500 text-white cursor-pointer hover:opacity-50;
+  #form-required {
+    @apply absolute right-0 -top-32 py-2 px-4 text-sm rounded-xl shadow-lg 
   }
 
-  .btn-login {
-    @apply py-2 px-4 rounded-md bg-green-500 text-white cursor-pointer hover:opacity-50;
+  .form-required-item {
+    @apply flex items-center gap-2
   }
 
   /*Product*/

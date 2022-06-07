@@ -11,7 +11,7 @@ function NavMenu() {
   return (
     <ul className="nav-menu">
       <NavLink
-        to="/menu/all"
+        to="all"
         className={({ isActive }) => (isActive ? "menu-active" : "menu")}
       >
         All
@@ -20,7 +20,7 @@ function NavMenu() {
       {cate.map((item, index) => (
         <NavLink
           key={index}
-          to={`/menu/${item.cateName.toLowerCase()}`}
+          to={`${item.cateName.toLowerCase()}`}
           className={({ isActive }) => (isActive ? "menu-active" : "menu")}
         >
           {item.cateName}
