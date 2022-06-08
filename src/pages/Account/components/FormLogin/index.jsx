@@ -14,12 +14,14 @@ function FormLogin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(getListUser());
-  });
-
   const users = useSelector((state) => state.user.users);
-  const user = useSelector((state) => state.user.user);
+  const isLogin = useSelector((state) => state.user.isLogin)
+
+  useEffect(() => {
+    if(isLogin) navigate("info")
+    dispatch(getListUser());
+  },[]);
+
 
   const [showPass, setShowPass] = useState(false);
 

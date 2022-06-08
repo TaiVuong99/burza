@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import {
   FaLock,
@@ -11,39 +11,150 @@ import {
   FaSave,
 } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { AiFillCheckCircle, AiOutlineCheckCircle } from "react-icons/ai";
+
 import { ImExit, ImHome } from "react-icons/im";
 import { HiIdentification } from "react-icons/hi";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { signOutUser, updateUser } from "../../../../redux/userSlice";
 FormInfo.propTypes = {};
 
 function FormInfo(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // console.log(user.name)
   const user = useSelector((state) => state.user.user);
   const isLogin = useSelector((state) => state.user.isLogin);
 
   const [showPass, setShowPass] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
-  const [showChange, setShowChange] = useState(false);
-
   //   const location = useLocation();
+  useEffect(() => {
+  }, [user])
+  const WRONG = `text-red-600`;
+  const VALID = `text-green-600`;
+  const strongRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+  );
 
   const handleShowPassword = () => {
     setShowPass(!showPass);
   };
 
-  const handleChangePassword = () => {
-    setShowChange(!showChange);
+  const handleSignOut = () => {
+    if(window.confirm('Do you want to sign out ?') === true) {
+       navigate("")
+       dispatch(signOutUser())
+    }
+  }
 
-    const NEW_PASS = document.getElementById("new-pass");
-    const CONFIRM_PASS = document.getElementById("confirm-pass");
+  const handleCheckPass = () => {
+    const FORM_REQUIRED = document.getElementById("form-required");
+    FORM_REQUIRED.classList.remove("hidden");
+  };
 
-    if (showChange) {
-      NEW_PASS.classList.remove("hidden");
-      CONFIRM_PASS.classList.remove("hidden");
+  const handleOnBlur = () => {
+    const FORM_REQUIRED = document.getElementById("form-required");
+    FORM_REQUIRED.classList.add("hidden");
+  };
+
+  const checkPassLength = (value, flag, element) => {
+    if (value.length >= 8) {
+      flag = true;
+      element.classList.remove(`${WRONG}`);
+      element.classList.add(`${VALID}`);
     } else {
-      NEW_PASS.classList.add("hidden");
-      CONFIRM_PASS.classList.add("hidden");
+      flag = false;
+      element.classList.remove(`${VALID}`);
+      element.classList.add(`${WRONG}`);
+    }
+    return flag;
+  };
+
+  const checkPassLetter = (value, flag, element) => {
+    if (value.toLowerCase() == value) {
+      flag = false;
+      element.classList.add(`${WRONG}`);
+      element.classList.remove(`${VALID}`);
+    } else {
+      flag = true;
+      element.classList.remove(`${WRONG}`);
+      element.classList.add(`${VALID}`);
+    }
+    return flag;
+  };
+
+  const checkPassNumber = (value, flag, element) => {
+    const stringCompare = "0123456789";
+
+    for (let i of stringCompare) {
+      if (value.includes(i)) flag = true;
+    }
+
+    if (flag === true) {
+      element.classList.remove(`${WRONG}`);
+      element.classList.add(`${VALID}`);
+    } else {
+      element.classList.add(`${WRONG}`);
+      element.classList.remove(`${VALID}`);
+    }
+    return flag;
+  };
+
+  const checkPassSpecial = (value, flag, element) => {
+    const stringCompare = "!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?`~";
+
+    for (let i of stringCompare) {
+      if (value.includes(i)) flag = true;
+    }
+
+    if (flag === true) {
+      element.classList.add(`${VALID}`);
+      element.classList.remove(`${WRONG}`);
+    } else {
+      element.classList.add(`${WRONG}`);
+      element.classList.remove(`${VALID}`);
+    }
+    return flag;
+  };
+
+  const handleOnChange = (e) => {
+    formik.setFieldValue("newPassword", e.target.value);
+
+    const FORM_REQUIRED = document.getElementById("form-required");
+    const PASS_LENGTH = document.getElementById("pass-length");
+    const PASS_LETTER = document.getElementById("pass-letter");
+    const PASS_NUMBER = document.getElementById("pass-number");
+    const PASS_SPECIAL = document.getElementById("pass-special");
+    const PASS_VALID = document.getElementById("pass-valid");
+
+    let lengthCheck = false;
+    let letterCheck = false;
+    let numberCheck = false;
+    let specialCheck = false;
+
+    lengthCheck = checkPassLength(e.target.value, lengthCheck, PASS_LENGTH);
+    letterCheck = checkPassLetter(e.target.value, letterCheck, PASS_LETTER);
+    numberCheck = checkPassNumber(e.target.value, numberCheck, PASS_NUMBER);
+    specialCheck = checkPassSpecial(e.target.value, specialCheck, PASS_SPECIAL);
+
+    if (
+      lengthCheck === true &&
+      letterCheck === true &&
+      numberCheck === true &&
+      specialCheck === true
+    ) {
+      PASS_VALID.classList.remove("hidden");
+
+      FORM_REQUIRED.classList.remove(`bg-red-600/40`);
+      FORM_REQUIRED.classList.add(`bg-green-600/40`);
+    } else {
+      PASS_VALID.classList.add("hidden");
+
+      FORM_REQUIRED.classList.add(`bg-red-600/40`);
+      FORM_REQUIRED.classList.remove(`bg-green-600/40`);
     }
   };
 
@@ -53,8 +164,9 @@ function FormInfo(props) {
       password: user.password,
       newPassword: "",
       confirmPassword: "",
-      name: "",
-      address: "",
+      name: user.name  ? user.name : "",
+      address: user.address  ? user.address : "",
+      showChange: false,
     },
 
     validationSchema: Yup.object({
@@ -62,24 +174,45 @@ function FormInfo(props) {
 
       password: Yup.string(),
 
+      showChange: Yup.boolean(),
+
       newPassword: Yup.string().when("showChange", {
-        is: showChange,
-        then: Yup.string().required("This field is required."),
-        otherwise: Yup.string(),
+        is: true,
+        then: Yup.string()
+          .matches(
+            strongRegex,
+            "Your password must be at least 8 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character"
+          )
+          .required("This field is required."),
       }),
 
       confirmPassword: Yup.string().when("showChange", {
-        is: showChange,
-        then: Yup.string().required("This field is required."),
-        otherwise: Yup.string(),
+        is: true,
+        then: Yup.string()
+          .oneOf([Yup.ref("newPassword")], "Password doesn't match")
+          .required("This field is required."),
       }),
 
-      name: Yup.string().required("This field is required."),
+      name: Yup.string(),
 
       address: Yup.string().required("This field is required."),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      const formChange = {
+        phone: values.phone,
+        password: values.password,
+        newPassword: values.newPassword,
+        name: values.name,
+        address: values.address
+      }
+      dispatch(updateUser(formChange))
+
+      if(formik.values.showChange) {
+        formik.setFieldValue('password', formik.values.newPassword)
+        formik.setFieldValue('showChange', false)
+        formik.setFieldValue("newPassword", "")
+        formik.setFieldValue("confirmPassword", "")
+      }
     },
   });
 
@@ -126,7 +259,17 @@ function FormInfo(props) {
 
           <FaEdit
             className="text-2xl cursor-pointer hover:opacity-50"
-            onClick={handleChangePassword}
+            value={formik.values.showChange}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            onClick={() =>{
+              formik.setFieldValue("showChange", !formik.values.showChange)
+              if(formik.values.showChange === false) {
+                formik.setFieldValue("newPassword", "")
+                formik.setFieldValue("confirmPassword", "")
+              }
+            }
+            }
           />
 
           {!showPass && (
@@ -138,67 +281,115 @@ function FormInfo(props) {
         </div>
       </div>
 
-      <div id="new-pass" className="form-container hidden">
-        <label htmlFor="newPassword">New Password:</label>
-        <div className="form-input">
-          <RiLockPasswordFill className="text-xl" />
-          <input
-            type={showNewPass ? "text" : "password"}
-            name="newPassword"
-            value={formik.values.newPassword}
-            onChange={formik.handleChange}
-            placeholder="New Password"
-            className="form-type"
-          />
+      {formik.values.showChange && (
+        <>
+          <div id="new-pass" className="form-container">
+            <label htmlFor="newPassword">New Password:</label>
 
-          {!showNewPass && (
-            <FaRegEye
-              className="form-show"
-              onClick={() => setShowNewPass(!showNewPass)}
-            />
-          )}
-          {showNewPass && (
-            <FaRegEyeSlash
-              className="form-show"
-              onClick={() => setShowNewPass(!showNewPass)}
-            />
-          )}
-        </div>
-        {formik.touched.newPassword && formik.errors.newPassword ? (
-          <div className="form-error">{formik.errors.newPassword}</div>
-        ) : null}
-      </div>
+            <div className="form-input relative">
+              <div id="form-required" className="hidden bg-red-600/40">
+                <div className="flex flex-col gap-0">
+                  Password security requirements:
+                  <div
+                    id="pass-length"
+                    className="text-red-600 form-required-item"
+                  >
+                    <AiOutlineCheckCircle />
+                    use at least 8 characters
+                  </div>
+                  <div
+                    id="pass-number"
+                    className="text-red-600 form-required-item"
+                  >
+                    <AiOutlineCheckCircle />
+                    mix letters and numbers
+                  </div>
+                  <div
+                    id="pass-letter"
+                    className="text-red-600 form-required-item"
+                  >
+                    <AiOutlineCheckCircle />
+                    mix lower and uppercase
+                  </div>
+                  <div
+                    id="pass-special"
+                    className="text-red-600 form-required-item"
+                  >
+                    <AiOutlineCheckCircle />
+                    use special characters (e.g. @)
+                  </div>
+                </div>
+              </div>
 
-      <div id="confirm-pass" className="form-container hidden">
-        <label htmlFor="confirmPassword">Confirm Password:</label>
-        <div className="form-input">
-          <RiLockPasswordFill className="text-xl" />
-          <input
-            type={showConfirmPass ? "text" : "password"}
-            name="confirmPassword"
-            value={formik.values.confirmPassword}
-            onChange={formik.handleChange}
-            placeholder="Confirm Password"
-            className="form-type"
-          />
+              <RiLockPasswordFill className="text-xl" />
 
-          {!showConfirmPass && (
-            <FaRegEye
-              className="form-show"
-              onClick={() => setShowConfirmPass(!showConfirmPass)}
-            />
-          )}
-          {showConfirmPass && (
-            <FaRegEyeSlash
-              className="form-show"
-              onClick={() => setShowConfirmPass(!showConfirmPass)}
-            />
-          )}
-        </div>
-        {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-          <div className="form-error">{formik.errors.confirmPassword}</div>
-        ) : null}
-      </div>
+              <input
+                type={showNewPass ? "text" : "password"}
+                name="newPassword"
+                value={formik.values.newPassword}
+                onChange={(e) => handleOnChange(e)}
+                onFocus={() => handleCheckPass()}
+                onBlur={() => handleOnBlur()}
+                placeholder="New Password"
+                className="form-type"
+              />
+
+              <AiFillCheckCircle
+                id="pass-valid"
+                className="hidden text-green-700 text-2xl"
+              />
+
+              {!showNewPass && (
+                <FaRegEye
+                  className="form-show"
+                  onClick={() => setShowNewPass(!showNewPass)}
+                />
+              )}
+              {showNewPass && (
+                <FaRegEyeSlash
+                  className="form-show"
+                  onClick={() => setShowNewPass(!showNewPass)}
+                />
+              )}
+            </div>
+            {formik.touched.newPassword && formik.errors.newPassword ? (
+              <div className="form-error">{formik.errors.newPassword}</div>
+            ) : null}
+          </div>
+
+          <div id="confirm-pass" className="form-container">
+            <label htmlFor="confirmPassword">Confirm Password:</label>
+            <div className="form-input">
+              <RiLockPasswordFill className="text-xl" />
+              <input
+                type={showConfirmPass ? "text" : "password"}
+                name="confirmPassword"
+                value={formik.values.confirmPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                placeholder="Confirm Password"
+                className="form-type"
+              />
+
+              {!showConfirmPass && (
+                <FaRegEye
+                  className="form-show"
+                  onClick={() => setShowConfirmPass(!showConfirmPass)}
+                />
+              )}
+              {showConfirmPass && (
+                <FaRegEyeSlash
+                  className="form-show"
+                  onClick={() => setShowConfirmPass(!showConfirmPass)}
+                />
+              )}
+            </div>
+            {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+              <div className="form-error">{formik.errors.confirmPassword}</div>
+            ) : null}
+          </div>
+        </>
+      )}
 
       <div className="form-container">
         <label htmlFor="name">Name:</label>
@@ -209,6 +400,7 @@ function FormInfo(props) {
             name="name"
             value={formik.values.name}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             placeholder="What's your name ?"
             className="form-type"
           />
@@ -227,6 +419,7 @@ function FormInfo(props) {
             name="address"
             value={formik.values.address}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             placeholder="What's your address ?"
             className="form-type"
           />
@@ -237,10 +430,10 @@ function FormInfo(props) {
       </div>
 
       <div className="form-container flex-row items-center justify-evenly">
-        <NavLink to="" className="form-btn flex items-center gap-2 bg-red-600">
+        <div className="form-btn flex items-center gap-2 bg-red-600 cursor-pointer" onClick={handleSignOut}>
           <ImExit />
           Sign Out
-        </NavLink>
+        </div>
 
         <button
           id="btn-save"

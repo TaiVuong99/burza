@@ -23,10 +23,21 @@ const userSlice = createSlice({
     userLogin: (state, action) => {
         state.user = action.payload
         state.isLogin = true
+    },
+
+    updateUser: () => {},
+
+    updateUserSuccess: (state, action) => {
+        state.user = action.payload
+    },
+
+    signOutUser: (state) => {
+      state.user = {}
+      state.isLogin = false
     }
   },
 });
 
 const { actions, reducer } = userSlice;
-export const { getListUser, getListUserSuccess, createUser, setUser, userLogin } = actions;
+export const { getListUser, getListUserSuccess, createUser, setUser, userLogin, updateUser, updateUserSuccess, signOutUser } = actions;
 export default reducer;

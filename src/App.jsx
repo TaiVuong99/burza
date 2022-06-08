@@ -11,6 +11,7 @@ import Header from "./components/Header";
 import HeaderMobile from "./components/HeaderMobile";
 import Account from "./pages/Account";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 
@@ -47,6 +48,7 @@ function App() {
           
           <Route path="cart" element={<Cart />} />
 
+          <Route path="checkout" element={<Checkout />}/>
           <Route path="*" element={<Home />} />
         </Routes>
 
