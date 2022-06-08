@@ -48,9 +48,13 @@ const cartSlice = createSlice({
 
      state.splice(indexRemove, 1)
     },
+
+    clearCart: (state, action) => {
+      return state = []
+    }
   },
 });
 
 const { actions, reducer } = cartSlice;
-export const { addCart, updateCart, deleteCart } = actions;
+export const { addCart, updateCart, deleteCart, clearCart } = actions;
 export default reducer;

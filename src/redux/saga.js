@@ -7,6 +7,7 @@ import { getCateSuccess } from "./cateSlice";
 import { getListUserSuccess, setUser, updateUserSuccess } from "./userSlice";
 import { toast } from "react-toastify";
 import { postOrderSucces } from "./orderSlice";
+import { clearCart } from "./cartSlice";
 
 function* workGetProducts() {
   yield delay(1000);
@@ -162,6 +163,7 @@ function* workPostOrder(action) {
   try {
     const order = yield axios.post(`${import.meta.env.VITE_ORDER}`, formOrder)
     yield put(postOrderSucces(order.data))
+    yield put(clearCart())
   } catch (e) {
     toast.error(`Fail to checkout`, {
       position: "bottom-right",

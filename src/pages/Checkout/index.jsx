@@ -74,7 +74,7 @@ function Checkout(props) {
         </div>
       )}
 
-      {!order && <Navigate to="/home" />}
+      {Object.keys(order).length === 0 && order.constructor === Object && <Navigate to="/home" />}
     </div>
   );
 }
