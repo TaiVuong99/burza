@@ -9,8 +9,9 @@ import {
   BsYoutube,
 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+
 function Footer() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <footer>
       <div className="footer">
@@ -54,15 +55,30 @@ function Footer() {
         </div>
 
         <div className="col-container gap-2">
-          <div className="footer-title" onClick={() => navigate('/')}>Home</div>
-          <div className="footer-title" onClick={() => navigate('/menu')}>Menu</div>
-          <div className="footer-title" onClick={() => navigate('/account')}>Account</div>
-          <div className="footer-title" onClick={() => navigate('/cart')}>cart</div>
+          <div className="footer-title" onClick={() => navigate("/")}>
+            Home
+          </div>
+          <div className="footer-title" onClick={() => navigate("/menu")}>
+            Menu
+          </div>
+          <div className="footer-title" onClick={() => navigate("/account")}>
+            Account
+          </div>
+          <div className="footer-title" onClick={() => navigate("/cart")}>
+            cart
+          </div>
         </div>
       </div>
 
       <div className="text-center my-1 text-lg text-gray-700">
-        © Burza 2022 | Owned by <a href="https://github.com/TaiVuong99/burza" target="_blank" className="font-bold text-violet-800 hover:underline">Michael Wang</a>
+        © Burza 2022 | Owned by{" "}
+        <a
+          href="https://github.com/TaiVuong99/burza"
+          target="_blank"
+          className="font-bold text-violet-800 hover:underline"
+        >
+          Michael Wang
+        </a>
       </div>
     </footer>
   );

@@ -1,13 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import { postOrder } from "../../../../redux/orderSlice";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-Bill.propTypes = {};
+import { postOrder } from "../../../../redux/orderSlice";
 
-function Bill(props) {
+function Bill() {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user.user);
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -28,6 +26,19 @@ function Bill(props) {
   }
 
   const handleCheckOut = () => {
+    if (user.address === "") {
+      toast.error('Please fill in the address before paying !?', {
+        position: "bottom-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+      return;
+    }
+
     if (window.confirm("Are you sure want to order ?") === true) {
       const formOrder = {
         user,
@@ -51,7 +62,7 @@ function Bill(props) {
 
       setTimeout(() => {
         navigate("/checkout");
-      }, 2000);
+      }, 3000);
     }
   };
 
@@ -60,7 +71,7 @@ function Bill(props) {
       <div className="info-container">
         <div className="info-title">Customer Info</div>
 
-        {isLogin && (
+        {isLogin ? (
           <div>
             <div className="flex justify-between items-center">
               <div className="info-content">Phone: {user.phone}</div>
@@ -69,16 +80,14 @@ function Bill(props) {
 
             <div className="info-content">Address: {user.address}</div>
           </div>
-        )}
-
-        {!isLogin && (
+        ) : (
           <div>
-            Please
+            You must be
             <NavLink to="/account" className="form-nav">
               {" "}
-              Log in
+              Logged in
             </NavLink>{" "}
-            to checkout your order
+            to checkout
           </div>
         )}
       </div>

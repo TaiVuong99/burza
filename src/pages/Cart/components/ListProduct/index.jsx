@@ -1,13 +1,11 @@
 import React from "react";
-
 import { FaTrashAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-
-import { deleteCart, updateCart } from "../../../../redux/cartSlice";
 import { toast } from "react-toastify";
 
+import { deleteCart, updateCart } from "../../../../redux/cartSlice";
 
-function ListProduct(props) {
+function ListProduct() {
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();

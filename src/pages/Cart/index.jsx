@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import Bill from "./components/Bill";
+
 import ListProduct from "./components/ListProduct";
 
 function Cart() {

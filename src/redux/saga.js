@@ -26,7 +26,6 @@ function* workGetProducts() {
       draggable: true,
       progress: undefined,
     });
-    console.log(e);
   }
 }
 
@@ -45,7 +44,6 @@ function* workGetCate() {
       draggable: true,
       progress: undefined,
     });
-    console.log(e);
   }
 }
 
@@ -65,7 +63,6 @@ function* workGetListUser(action) {
       draggable: true,
       progress: undefined,
     });
-    console.log(e);
   }
 }
 
@@ -93,7 +90,6 @@ function* workCreateUser(action) {
       draggable: true,
       progress: undefined,
     });
-    console.log(e);
   }
 }
 
@@ -122,7 +118,7 @@ function* workUpdateUser(action) {
       `${import.meta.env.VITE_USER}/${user.id}`,
       formUpdate
     );
-    toast.success(`Change Successfully!!!`, {
+    toast.success(`Update Successfully!!!`, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -142,7 +138,6 @@ function* workUpdateUser(action) {
       draggable: true,
       progress: undefined,
     });
-    console.log(e);
   }
 }
 
@@ -174,7 +169,6 @@ function* workPostOrder(action) {
       draggable: true,
       progress: undefined,
     });
-    console.log(e);
   }
 }
 

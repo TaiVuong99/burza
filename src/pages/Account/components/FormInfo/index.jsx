@@ -1,36 +1,30 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
-import {
-  FaLock,
-  FaRegEye,
-  FaRegEyeSlash,
-  FaUserAlt,
-  FaEdit,
-  FaSave,
-} from "react-icons/fa";
-import { RiLockPasswordFill } from "react-icons/ri";
+import React, { useEffect, useState } from "react";
 import { AiFillCheckCircle, AiOutlineCheckCircle } from "react-icons/ai";
-
-import { ImExit, ImHome } from "react-icons/im";
+import {
+  FaEdit, FaLock,
+  FaRegEye,
+  FaRegEyeSlash, FaSave, FaUserAlt
+} from "react-icons/fa";
 import { HiIdentification } from "react-icons/hi";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { ImExit, ImHome } from "react-icons/im";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { signOutUser, updateUser } from "../../../../redux/userSlice";
-FormInfo.propTypes = {};
 
-function FormInfo(props) {
+import { signOutUser, updateUser } from "../../../../redux/userSlice";
+
+function FormInfo() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log(user.name)
+
   const user = useSelector((state) => state.user.user);
-  const isLogin = useSelector((state) => state.user.isLogin);
 
   const [showPass, setShowPass] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
-  //   const location = useLocation();
+
   useEffect(() => {
   }, [user])
   const WRONG = `text-red-600`;
@@ -264,7 +258,7 @@ function FormInfo(props) {
             onBlur={formik.handleBlur}
             onClick={() =>{
               formik.setFieldValue("showChange", !formik.values.showChange)
-              if(formik.values.showChange === false) {
+              if(!formik.values.showChange) {
                 formik.setFieldValue("newPassword", "")
                 formik.setFieldValue("confirmPassword", "")
               }
@@ -287,7 +281,7 @@ function FormInfo(props) {
             <label htmlFor="newPassword">New Password:</label>
 
             <div className="form-input relative">
-              <div id="form-required" className="hidden bg-red-600/40">
+              <div id="form-required" className="hidden bg-red-600/50" style={{right: "4rem"}}>
                 <div className="flex flex-col gap-0">
                   Password security requirements:
                   <div
