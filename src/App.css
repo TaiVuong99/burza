@@ -8,7 +8,7 @@
   }
 
   html {
-    @apply text-xs md:text-base
+    @apply text-sm md:text-base
   }
 }
 
