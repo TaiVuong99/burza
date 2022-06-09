@@ -6,6 +6,10 @@
   body {
     @apply font-roboto;
   }
+
+  html {
+    @apply text-xs md:text-base
+  }
 }
 
 @tailwind components;
