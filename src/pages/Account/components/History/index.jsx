@@ -35,7 +35,7 @@ function History() {
 
           {order.map((item, index) => (
             <li className="grid grid-cols-4" key={index}>
-              <div className="col-span-2 p-2 self-center">{item.orderId}</div>
+              <div className="col-span-2 p-2 flex items-center justify-center">{item.orderId}</div>
               <div className="col-span-1 py-2 border-x-2 capitalize flex items-center justify-center">
                 {item.status}
               </div>

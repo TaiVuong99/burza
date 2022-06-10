@@ -18,6 +18,8 @@ import Menu from "./pages/Menu";
 import { getCate } from "./redux/cateSlice";
 import { getProducts } from "./redux/productSlice";
 import { getListUser } from "./redux/userSlice";
+import Admin from "./pages/Admin";
+import { getListOrder } from "./redux/orderSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,14 +28,18 @@ function App() {
     dispatch(getProducts());
     dispatch(getCate());
     dispatch(getListUser());
+    dispatch(getListOrder());
   }, []);
 
   return (
     <>
       <BrowserView className="App">
         <Header />
-
         <Routes>
+          <Route path="admin" element={<Admin/>}>
+            <Route path=":adminTask" element={<Admin/>}/>
+          </Route>
+          
           <Route path="/" element={<Home />} />
 
           <Route path="menu" element={<Menu />}>

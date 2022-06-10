@@ -62,7 +62,7 @@ function Bill() {
 
       setTimeout(() => {
         navigate("/account/order");
-      }, 3000);
+      }, 2000);
     }
   };
 

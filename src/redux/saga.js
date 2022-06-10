@@ -1,13 +1,13 @@
 import axios from "axios";
-import { call, delay, put, takeLatest, select } from "redux-saga/effects";
-import { v4 as uuid } from "uuid";
-
-import { getProductsSuccess } from "./productSlice";
-import { getCateSuccess } from "./cateSlice";
-import { getListUserSuccess, setUser, updateUserSuccess } from "./userSlice";
 import { toast } from "react-toastify";
-import { cancelOrderSuccess, getOrderSuccess, postOrderSucces } from "./orderSlice";
+import { call, delay, put, select, takeLatest } from "redux-saga/effects";
+import { v4 as uuid } from "uuid";
 import { clearCart } from "./cartSlice";
+import { getCateSuccess } from "./cateSlice";
+import { cancelOrderSuccess, getOrderSuccess } from "./orderSlice";
+import { getProductsSuccess } from "./productSlice";
+import { getListUserSuccess, setUser, updateUserSuccess } from "./userSlice";
+
 
 function* workGetProducts() {
   yield delay(1000);
@@ -17,7 +17,7 @@ function* workGetProducts() {
     );
     if (products.status === 200) yield put(getProductsSuccess(products.data));
   } catch (e) {
-    toast.error(`Fail to fetch`, {
+    toast.error(`Fail to fetch list product`, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -35,7 +35,7 @@ function* workGetCate() {
     const cate = yield call(() => axios.get(`${import.meta.env.VITE_CATE}`));
     if (cate.status === 200) yield put(getCateSuccess(cate.data));
   } catch (e) {
-    toast.error(`Fail to fetch`, {
+    toast.error(`Fail to fetch list category`, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -54,7 +54,7 @@ function* workGetListUser(action) {
     const users = yield call(() => axios.get(`${import.meta.env.VITE_USER}`));
     if (users.status === 200) yield put(getListUserSuccess(users.data));
   } catch (e) {
-    toast.error(`Fail to fetch`, {
+    toast.error(`Fail to fetch list user`, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -81,7 +81,7 @@ function* workCreateUser(action) {
     );
     if (user.status === 201) yield put(setUser(user.data));
   } catch (e) {
-    toast.error(`Fail to post`, {
+    toast.error(`Fail to create user`, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -155,7 +155,36 @@ function* workGetOrder(action) {
     yield put(getOrderSuccess(userOrder))
   }
   catch(e){
+    toast.error(`Fail to fetch order`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
 
+function* workGetListOrder(action) {
+  yield delay(1000)
+
+  try {
+    const order = yield call(() => axios.get(`${import.meta.env.VITE_ORDER}`))
+
+    yield put(getOrderSuccess(order))
+  }
+  catch(e){
+    toast.error(`Fail to fetch list order`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
 
@@ -176,7 +205,6 @@ function* workPostOrder(action) {
 
   try {
     const order = yield call(() => axios.post(`${import.meta.env.VITE_ORDER}`, formOrder))
-    yield put(postOrderSucces(order.data))
     yield put(clearCart())
   } catch (e) {
     toast.error(`Fail to checkout`, {
@@ -237,6 +265,7 @@ function* saga() {
   yield takeLatest("user/updateUser", workUpdateUser);
 
   yield takeLatest("order/getOrder", workGetOrder);
+  yield takeLatest("order/getListOrder", workGetListOrder);
   yield takeLatest("order/postOrder", workPostOrder);
   yield takeLatest("order/cancelOrder", workCancelOrder);
 }

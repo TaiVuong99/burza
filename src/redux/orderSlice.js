@@ -4,32 +4,40 @@ const orderSlice = createSlice({
   name: "order",
   initialState: [],
   reducers: {
-    getOrder: () => {}, 
+    getOrder: () => {},
 
     getOrderSuccess: (state, action) => {
-      return state = action.payload
+      return (state = action.payload);
     },
 
-    postOrder: () => {
-      
+    getListOrder: () => {},
+
+    getListOrderSuccess: (state, action) => {
+      return (state = action.payload);
     },
 
-    postOrderSucces: (state, action) => {
-      return state = action.payload
-    },
+    postOrder: () => {},
 
     cancelOrder: () => {},
 
     cancelOrderSuccess: (state, action) => {
-      let index = state.findIndex(order => order.id === action.payload.id)
+      let index = state.findIndex((order) => order.id === action.payload.id);
 
       state[index] = {
-        ...action.payload
-      }
-    }
+        ...action.payload,
+      };
+    },
   },
 });
 
 const { actions, reducer } = orderSlice;
-export const { getOrder, getOrderSuccess, postOrder, postOrderSucces, cancelOrder, cancelOrderSuccess } = actions;
+export const {
+  getOrder,
+  getOrderSuccess,
+  getListOrder,
+  getListOrderSuccess,
+  postOrder,
+  cancelOrder,
+  cancelOrderSuccess,
+} = actions;
 export default reducer;

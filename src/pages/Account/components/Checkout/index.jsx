@@ -27,7 +27,7 @@ function Checkout() {
       ) : (
         <div className="order-bill relative">
           {order.status === 'cancel' && (
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2  border-double border-2 p-4 uppercase text-redd border-redd font-bold text-2xl -rotate-45">
+            <div className="absolute top-32 left-1/2 -translate-x-1/2  border-double border-2 p-4 uppercase text-redd border-redd font-bold text-2xl -rotate-45">
               Cancelled
             </div>
           )}
