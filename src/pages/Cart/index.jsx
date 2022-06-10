@@ -18,7 +18,7 @@ function Cart() {
       ) : (
         <>
           <div className="col-span-3 text-xl font-bold text-center uppercase">
-            You don't have any product
+            You don't have any food
           </div>
         </>
       )}

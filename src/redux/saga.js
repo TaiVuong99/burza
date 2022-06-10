@@ -6,7 +6,7 @@ import { getProductsSuccess } from "./productSlice";
 import { getCateSuccess } from "./cateSlice";
 import { getListUserSuccess, setUser, updateUserSuccess } from "./userSlice";
 import { toast } from "react-toastify";
-import { postOrderSucces } from "./orderSlice";
+import { cancelOrderSuccess, getOrderSuccess, postOrderSucces } from "./orderSlice";
 import { clearCart } from "./cartSlice";
 
 function* workGetProducts() {
@@ -141,6 +141,24 @@ function* workUpdateUser(action) {
   }
 }
 
+function* workGetOrder(action) {
+  yield delay(1000)
+
+  const state = yield select();
+  const user = state.user.user;
+
+  try {
+    const order = yield call(() => axios.get(`${import.meta.env.VITE_ORDER}`))
+
+    const userOrder = yield order.data.filter(item => item.user.phone === user.phone)
+
+    yield put(getOrderSuccess(userOrder))
+  }
+  catch(e){
+
+  }
+}
+
 function* workPostOrder(action) {
   yield delay(1000)
 
@@ -152,11 +170,12 @@ function* workPostOrder(action) {
   const formOrder = {
     ...action.payload,
     orderId: uuid(),
-    dateTime
+    dateTime,
+    status: 'order'
   }
 
   try {
-    const order = yield axios.post(`${import.meta.env.VITE_ORDER}`, formOrder)
+    const order = yield call(() => axios.post(`${import.meta.env.VITE_ORDER}`, formOrder))
     yield put(postOrderSucces(order.data))
     yield put(clearCart())
   } catch (e) {
@@ -172,6 +191,42 @@ function* workPostOrder(action) {
   }
 }
 
+function* workCancelOrder(action) {
+  yield delay(1000)
+
+  const formCancel = {
+    ...action.payload,
+    status: 'cancel'
+  }
+
+  try {
+    const order = yield call(() => axios.put(`${import.meta.env.VITE_ORDER}/${formCancel.id}`, formCancel))
+
+    yield put(cancelOrderSuccess(order.data))
+
+    toast.success(`Cancel Order Successfully !!!`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  } catch {
+    toast.error(`Fail to cancel order`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+}
+
 function* saga() {
   yield takeLatest("products/getProducts", workGetProducts);
 
@@ -181,7 +236,9 @@ function* saga() {
   yield takeLatest("user/createUser", workCreateUser);
   yield takeLatest("user/updateUser", workUpdateUser);
 
+  yield takeLatest("order/getOrder", workGetOrder);
   yield takeLatest("order/postOrder", workPostOrder);
+  yield takeLatest("order/cancelOrder", workCancelOrder);
 }
 
 export default saga;

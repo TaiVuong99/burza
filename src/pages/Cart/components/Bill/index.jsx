@@ -61,7 +61,7 @@ function Bill() {
       });
 
       setTimeout(() => {
-        navigate("/checkout");
+        navigate("/account/order");
       }, 3000);
     }
   };

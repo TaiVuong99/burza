@@ -2,18 +2,23 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { AiFillCheckCircle, AiOutlineCheckCircle } from "react-icons/ai";
 import {
-  FaEdit, FaLock,
+  FaEdit,
+  FaLock,
   FaRegEye,
-  FaRegEyeSlash, FaSave, FaUserAlt
+  FaRegEyeSlash,
+  FaSave,
+  FaUserAlt,
 } from "react-icons/fa";
 import { HiIdentification } from "react-icons/hi";
 import { ImExit, ImHome } from "react-icons/im";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { GoListUnordered } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import { signOutUser, updateUser } from "../../../../redux/userSlice";
+import { toast } from "react-toastify";
 
 function FormInfo() {
   const dispatch = useDispatch();
@@ -25,8 +30,6 @@ function FormInfo() {
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
 
-  useEffect(() => {
-  }, [user])
   const WRONG = `text-red-600`;
   const VALID = `text-green-600`;
   const strongRegex = new RegExp(
@@ -38,10 +41,14 @@ function FormInfo() {
   };
 
   const handleSignOut = () => {
-    if(window.confirm('Do you want to sign out ?') === true) {
-       navigate("")
-       dispatch(signOutUser())
+    if (window.confirm("Do you want to sign out ?") === true) {
+      navigate("");
+      dispatch(signOutUser());
     }
+  };
+
+  const handleHistory = () => {
+    navigate('order')
   }
 
   const handleCheckPass = () => {
@@ -158,8 +165,8 @@ function FormInfo() {
       password: user.password,
       newPassword: "",
       confirmPassword: "",
-      name: user.name  ? user.name : "",
-      address: user.address  ? user.address : "",
+      name: user.name ? user.name : "",
+      address: user.address ? user.address : "",
       showChange: false,
     },
 
@@ -192,20 +199,35 @@ function FormInfo() {
       address: Yup.string().required("This field is required."),
     }),
     onSubmit: (values) => {
+      if(values.name === user.name && values.address === user.address) {
+        toast.error(`Data isn't changed`, {
+          position: "bottom-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        return;
+      }
+
       const formChange = {
         phone: values.phone,
         password: values.password,
         newPassword: values.newPassword,
         name: values.name,
-        address: values.address
-      }
-      dispatch(updateUser(formChange))
+        address: values.address,
+      };
 
-      if(formik.values.showChange) {
-        formik.setFieldValue('password', formik.values.newPassword)
-        formik.setFieldValue('showChange', false)
-        formik.setFieldValue("newPassword", "")
-        formik.setFieldValue("confirmPassword", "")
+      dispatch(updateUser(formChange));
+
+      if (formik.values.showChange) {
+        formik.setFieldValue("password", formik.values.newPassword);
+        formik.setFieldValue("showChange", false);
+        formik.setFieldValue("newPassword", "");
+        formik.setFieldValue("confirmPassword", "");
       }
     },
   });
@@ -256,14 +278,13 @@ function FormInfo() {
             value={formik.values.showChange}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            onClick={() =>{
-              formik.setFieldValue("showChange", !formik.values.showChange)
-              if(!formik.values.showChange) {
-                formik.setFieldValue("newPassword", "")
-                formik.setFieldValue("confirmPassword", "")
+            onClick={() => {
+              formik.setFieldValue("showChange", !formik.values.showChange);
+              if (!formik.values.showChange) {
+                formik.setFieldValue("newPassword", "");
+                formik.setFieldValue("confirmPassword", "");
               }
-            }
-            }
+            }}
           />
 
           {!showPass && (
@@ -281,7 +302,11 @@ function FormInfo() {
             <label htmlFor="newPassword">New Password:</label>
 
             <div className="form-input relative">
-              <div id="form-required" className="hidden bg-red-600/50" style={{right: "4rem"}}>
+              <div
+                id="form-required"
+                className="hidden bg-red-600/50"
+                style={{ right: "4rem" }}
+              >
                 <div className="flex flex-col gap-0">
                   Password security requirements:
                   <div
@@ -424,9 +449,20 @@ function FormInfo() {
       </div>
 
       <div className="form-container flex-row items-center justify-evenly">
-        <div className="form-btn flex items-center gap-2 bg-red-600 cursor-pointer" onClick={handleSignOut}>
+        <div
+          className="form-btn flex items-center gap-2 bg-red-600 cursor-pointer"
+          onClick={handleSignOut}
+        >
           <ImExit />
           Sign Out
+        </div>
+
+        <div
+          className="form-btn flex items-center gap-2 bg-green-600 cursor-pointer"
+          onClick={handleHistory}
+        >
+          <GoListUnordered />
+          Order History
         </div>
 
         <button

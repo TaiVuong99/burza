@@ -8,7 +8,8 @@ module.exports = {
         roboto: ['Roboto', 'sans-serif']
       },
       colors: {
-        primary: 'rgb(6, 182, 212)'
+        primary: '#1D4ED8',
+        redd: '#fd0304'
       },
       backgroundImage: {
         'banner': "url('/src/assets/banner.jpg')",

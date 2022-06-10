@@ -11,7 +11,7 @@ import Header from "./components/Header";
 import HeaderMobile from "./components/HeaderMobile";
 import Account from "./pages/Account";
 import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
+import Checkout from "./pages/Account/components/Checkout";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 
@@ -24,8 +24,8 @@ function App() {
 
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(getCate())
-    dispatch(getListUser())
+    dispatch(getCate());
+    dispatch(getListUser());
   }, []);
 
   return (
@@ -36,19 +36,23 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
-          <Route path="menu" element={<Menu/>} >
-            <Route path=":cate" element={<Menu />} >
-              <Route path=":product" element={<Menu/>}/>
+          <Route path="menu" element={<Menu />}>
+            <Route path=":cate" element={<Menu />}>
+              <Route path=":product" element={<Menu />} />
             </Route>
           </Route>
 
-          <Route path="account" element={<Account />} >
-            <Route path=":status" element={<Account />} />
+          <Route path="account" element={<Account />}>
+            <Route path="signup" element={<Account />} />
+            <Route path="info" element={<Account />} />
+            <Route path="order" element={<Account />}>
+              <Route path=":orderId" element={<Account />} />
             </Route>
-          
+          </Route>
+
           <Route path="cart" element={<Cart />} />
 
-          <Route path="checkout" element={<Checkout />}/>
+          <Route path="checkout" element={<Checkout />} />
           <Route path="*" element={<Home />} />
         </Routes>
 
