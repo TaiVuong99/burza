@@ -44,6 +44,15 @@ function FormInfo() {
     if (window.confirm("Do you want to sign out ?") === true) {
       navigate("");
       dispatch(signOutUser());
+      toast.success(`Sign Out Successfully !!!`, {
+        position: "bottom-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 

@@ -24,7 +24,7 @@ function Account() {
       {location.pathname === "/account/order" && <History />}
 
       {location.pathname === `/account/order/${orderId}` && <Checkout />}
-      <ToastContainer />
+      <ToastContainer newestOnTop/>
     </div>
   );
 }
