@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import * as Yup from "yup";
+import DashBoard from "./components/DashBoard";
 import FormLogin from "./components/FormLogin";
 
 function Admin() {
@@ -15,6 +16,7 @@ function Admin() {
   return (
     <div className={`w-full ${location.pathname !== "/admin" ? "h-auto" : "h-screen"} flex justify-center items-center`}>
         {location.pathname === "/admin" && <FormLogin />}
+        {location.pathname === `/admin/${adminTask}` && <DashBoard/>}
         <ToastContainer newestOnTop />
     </div>
   );

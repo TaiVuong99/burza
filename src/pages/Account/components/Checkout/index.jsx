@@ -33,7 +33,7 @@ function Checkout() {
           )}
           <div>
             <div className="text-2xl font-bold">Order Id: {order.orderId}</div>
-            <div class="order-time">Order at: {order.dateTime}</div>
+            <div className="order-time">Order at: {order.dateTime}</div>
             <div className="order-time capitalize">Status: {order.status}</div>
           </div>
 

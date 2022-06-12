@@ -10,8 +10,6 @@ function FormLogin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const users = useSelector((state) => state.user.users);
-
   const [showPass, setShowPass] = useState(false);
 
   const handlePasswordChange = () => {
