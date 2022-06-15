@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-
+import { ToastContainer } from "react-toastify";
 import ModalDetail from "./components/ModalDetail";
 import NavMenu from "./components/NavMenu";
 import ProductCate from "./components/ProductCate";
 import useModal from "./hooks/useModal";
+
 
 function Menu() {
   let params = useParams();

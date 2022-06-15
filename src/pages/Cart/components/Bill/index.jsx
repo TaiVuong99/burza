@@ -27,7 +27,7 @@ function Bill() {
 
   const handleCheckOut = () => {
     if (user.address === "") {
-      toast.error('Please fill in the address before paying !?', {
+      toast.error('Please fill in the address before order !?', {
         position: "bottom-right",
         autoClose: 1500,
         hideProgressBar: false,

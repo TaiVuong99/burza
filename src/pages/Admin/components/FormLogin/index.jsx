@@ -41,7 +41,7 @@ function FormLogin() {
             draggable: true,
             progress: undefined,
         });
-        navigate("dashboard")
+        navigate("dashboard", {state: {adminLogin: true}})
       }
         
       else {

@@ -1,0 +1,45 @@
+import PropTypes from "prop-types";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { removeProduct, updateProduct } from "../../../../../../redux/productSlice";
+import ProductList from "./components/ProductList";
+
+ListItem.propsType = {
+  show: PropTypes.number,
+};
+
+ListItem.defaultProps = {
+  show: 5,
+};
+
+function ListItem(props) {
+  const { show } = props;
+  const { adminTask } = useParams();
+  const dispatch = useDispatch();
+
+  const handleEditProductSubmit = (form) => {
+    dispatch(updateProduct(form));
+  };
+
+  const handleRemove = (product) => {
+      dispatch(removeProduct(product));
+  }
+ 
+  //   console.log({ productCate, users, orders });
+  return (
+    <>
+      {adminTask === "products" && (
+        <ProductList show={show} onEditSubmit={handleEditProductSubmit} onRemove={handleRemove}/>
+      )}
+
+      {adminTask === "categories" && <div>cate</div>}
+
+      {adminTask === "users" && <div>user</div>}
+
+      {adminTask === "orders" && <div>order</div>}
+    </>
+  );
+}
+
+export default ListItem;

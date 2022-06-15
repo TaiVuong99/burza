@@ -1,0 +1,83 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "cateId": 1,
+      "productName": "Burger 1",
+      "price": 38,
+      "imageUrl": "https://taivuong99.github.io/burza-images/images/burger-1.jpg",
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "cateId": 1,
+      "productName": "Burger 2",
+      "price": 32,
+      "imageUrl": "https://taivuong99.github.io/burza-images/images/burger-2.jpg",
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "cateId": 1,
+      "productName": "Burger 3",
+      "price": 28,
+      "imageUrl": "https://taivuong99.github.io/burza-images/images/burger-3.jpg",
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "cateId": 1,
+      "productName": "Burger 4",
+      "price": 18,
+      "imageUrl": "https://taivuong99.github.io/burza-images/images/burger-4.jpg",
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "cateId": 2,
+      "productName": "Pizza 1",
+      "price": 38,
+      "imageUrl": "https://taivuong99.github.io/burza-images/images/pizza-1.jpg",
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "cateId": 2,
+      "productName": "Pizza 2",
+      "price": 32,
+      "imageUrl": "https://taivuong99.github.io/burza-images/images/pizza-2.jpg",
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "cateId": 2,
+      "productName": "Pizza 3",
+      "price": 28,
+      "imageUrl": "https://taivuong99.github.io/burza-images/images/pizza-3.jpg",
+      "notes": ""
+    },
+    {
+      "id": 8,
+      "cateId": 2,
+      "productName": "Pizza 4",
+      "price": 18,
+      "imageUrl": "https://taivuong99.github.io/burza-images/images/pizza-4.jpg",
+      "notes": ""
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "cateId": 1,
+      "cateName": "Burger"
+    },
+    {
+      "id": 2,
+      "cateId": 2,
+      "cateName": "Pizza"
+    }
+  ],
+  "cart": [],
+  "users": [],
+  "orders": []
+}

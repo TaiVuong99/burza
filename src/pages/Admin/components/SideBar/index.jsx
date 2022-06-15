@@ -1,60 +1,63 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { IoFastFood } from "react-icons/io5";
+import { BiCategory } from "react-icons/bi";
+import { FaUsers } from "react-icons/fa";
+import { RiBillFill } from "react-icons/ri";
 
-function SideBar(props) {
+function SideBar() {
   return (
-    <div className="col-span-1 flex flex-col bg-cyan-600/60">
-      <div className="text-center uppercase text-2xl font-bold py-4 bg-cyan-600">
+    <div className="col-span-1 flex flex-col bg-cyan-600/40">
+      <NavLink
+        to="dashboard"
+        className={({ isActive }) => (isActive ? " bg-cyan-600" : "")}
+      >
+        <div className="text-center uppercase text-2xl font-bold py-4 hover:bg-cyan-600">
         admin
-      </div>
+        </div>
+      </NavLink>
 
-      <div className="w-full flex flex-col gap-4">
-        <ul>
-          <li className="py-4 px-2">
-            <NavLink
-              to="products"
-              className={({ isActive }) =>
-                isActive ? "uppercase text-lg font-bold underline" : "uppercase text-lg"
-              }
-            >
-              products
-            </NavLink>
+      <ul className="w-full flex flex-col border-y-2">
+        <NavLink
+          to="products"
+          className={({ isActive }) => (isActive ? "font-bold bg-cyan-600/40" : "")}
+        >
+          <li className="admin-sidebar-item">
+            <IoFastFood />
+            products
           </li>
+        </NavLink>
 
-          <li className="py-4 px-2">
-            <NavLink
-              to="categories"
-              className={({ isActive }) =>
-                isActive ? "uppercase text-lg font-bold underline" : "uppercase text-lg"
-              }
-            >
-              Categories
-            </NavLink>
+        <NavLink
+          to="categories"
+          className={({ isActive }) => (isActive ? "font-bold bg-cyan-600/40" : "")}
+        >
+          <li className="admin-sidebar-item">
+            <BiCategory />
+            Categories
           </li>
+        </NavLink>
 
-          <li className="py-4 px-2">
-            <NavLink
-              to="users"
-              className={({ isActive }) =>
-                isActive ? "uppercase text-lg font-bold underline" : "uppercase text-lg"
-              }
-            >
-              users
-            </NavLink>
+        <NavLink
+          to="users"
+          className={({ isActive }) => (isActive ? "font-bold bg-cyan-600/40" : "")}
+        >
+          <li className="admin-sidebar-item">
+            <FaUsers />
+            users
           </li>
+        </NavLink>
 
-          <li className="py-4 px-2">
-            <NavLink
-              to="orders"
-              className={({ isActive }) =>
-                isActive ? "uppercase text-lg font-bold underline" : "uppercase text-lg"
-              }
-            >
-              orders
-            </NavLink>
+        <NavLink
+          to="orders"
+          className={({ isActive }) => (isActive ? "font-bold bg-cyan-600/40" : "")}
+        >
+          <li className="admin-sidebar-item">
+            <RiBillFill />
+            orders
           </li>
-        </ul>
-      </div>
+        </NavLink>
+      </ul>
     </div>
   );
 }

@@ -275,7 +275,7 @@
   /*Checkout*/
 
   .order-bill {
-    @apply w-full h-auto p-4 border-2 shadow-2xl flex flex-col gap-4
+    @apply w-full h-auto p-4 border-2 shadow-xl flex flex-col gap-4
   }
 
   .order-time {
@@ -284,6 +284,23 @@
 
   .order-title {
     @apply text-xl font-bold border-b-2 border-black mb-4
+  }
+
+  /*Admin*/
+  .admin-sidebar-item {
+    @apply py-4 px-2 flex gap-2 items-center uppercase text-lg hover:bg-cyan-600/40
+  }
+
+  .admin-list {
+    @apply w-full flex flex-col border-2
+  }
+
+  .admin-items {
+    @apply w-full grid grid-cols-12
+  }
+
+  .admin-title {
+    @apply flex items-center justify-center font-bold
   }
 
 }
