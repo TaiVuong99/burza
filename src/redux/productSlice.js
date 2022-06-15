@@ -32,7 +32,6 @@ const productSlice = createSlice({
 
     searchProductSuccess: (state, action) => {
         return state = action.payload
-        console.log(action.payload)
     }
   },
 });

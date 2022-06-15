@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getListOrder } from "../../../../redux/orderSlice";
 import { getProducts, searchProduct } from "../../../../redux/productSlice";
 import { getListUser } from "../../../../redux/userSlice";
-import { getCate } from "../../../../redux/cateSlice";
+import { getCate, searchCate } from "../../../../redux/cateSlice";
 
 import ListItem from "./components/ListItem";
 import SearchItem from "./components/SearchItem";
@@ -41,6 +41,11 @@ function PageContent() {
     switch (adminTask) {
       case "products": {
         dispatch(searchProduct(search));
+        setSearch("");
+        break;
+      }
+      case "categories" : {
+        dispatch(searchCate(search));
         setSearch("");
         break;
       }

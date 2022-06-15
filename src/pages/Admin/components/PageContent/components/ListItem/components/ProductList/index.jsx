@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
@@ -26,10 +26,10 @@ function ProductList(props) {
   const products = useSelector((state) => state.products);
   const cate = useSelector((state) => state.cate);
 
-  const productCate = products.map((product) => ({
+  const productCate = useMemo(() =>products.map((product) => ({
     ...product,
     cateName: cate.find((item) => item.cateId === product.cateId).cateName,
-  }));
+  })), [])
 
   const [editIndex, setEditIndex] = useState(-1);
   const [addNew, setAddNew] = useState(false);
@@ -142,12 +142,12 @@ function ProductList(props) {
             <>
               {index === editIndex ? (
                 <form onSubmit={formik.handleSubmit}>
-                  <li className="admin-items" key={index}>
-                    <div className="col-span-1 py-1 border-r-2 border-t-2 flex items-center justify-center">
+                  <li className="admin-items border-t-2" key={index}>
+                    <div className="col-span-1 py-1 border-r-2 flex items-center justify-center">
                       {product.id}
                     </div>
 
-                    <div className="col-span-3 border-r-2 border-t-2 flex flex-col justify-center px-2">
+                    <div className="col-span-3 border-r-2 flex flex-col justify-center px-2">
                       <input
                         type="text"
                         name="productName"
@@ -163,7 +163,7 @@ function ProductList(props) {
                       ) : null}
                     </div>
 
-                    <div className="col-span-3 border-r-2 border-t-2 flex items-center px-2">
+                    <div className="col-span-3 border-r-2 flex items-center px-2">
                       <select
                         name="cate"
                         value={formik.values.cateId}
@@ -178,7 +178,7 @@ function ProductList(props) {
                       </select>
                     </div>
 
-                    <div className="col-span-2 border-r-2 border-t-2 flex flex-col justify-center px-2">
+                    <div className="col-span-2 border-r-2 flex flex-col justify-center px-2">
                       <input
                         type="text"
                         name="price"
@@ -191,7 +191,7 @@ function ProductList(props) {
                       ) : null}
                     </div>
 
-                    <div className="col-span-3 border-t-2 flex justify-evenly items-center">
+                    <div className="col-span-3 flex justify-evenly items-center">
                       <div
                         className="cursor-pointer hover:underline hover:font-bold"
                         onClick={handleCancelEditClick}
@@ -209,24 +209,24 @@ function ProductList(props) {
                   </li>
                 </form>
               ) : (
-                <li className="admin-items" key={index}>
-                  <div className="col-span-1 py-1 border-r-2 border-t-2 flex items-center justify-center">
+                <li className="admin-items border-t-2" key={index}>
+                  <div className="col-span-1 py-1 border-r-2 flex items-center justify-center">
                     {product.id}
                   </div>
 
-                  <div className="col-span-3 border-r-2 border-t-2 pl-2 flex items-center">
+                  <div className="col-span-3 border-r-2 pl-2 flex items-center">
                     {product.productName}
                   </div>
 
-                  <div className="col-span-3 border-r-2 border-t-2 pl-2 flex items-center">
+                  <div className="col-span-3 border-r-2 pl-2 flex items-center">
                     {product.cateName}
                   </div>
 
-                  <div className="col-span-2 border-r-2 border-t-2 pl-2 flex items-center">
+                  <div className="col-span-2 border-r-2 pl-2 flex items-center">
                     {product.price}
                   </div>
 
-                  <div className="col-span-3 border-t-2 flex justify-evenly items-center">
+                  <div className="col-span-3 flex justify-evenly items-center">
                     <button
                       className="hover:underline  hover:font-bold text-primary"
                       onClick={() => handleEditClick(index)}

@@ -63,6 +63,14 @@
       "price": 18,
       "imageUrl": "https://taivuong99.github.io/burza-images/images/pizza-4.jpg",
       "notes": ""
+    },
+    {
+      "productName": "a",
+      "cateId": 3,
+      "price": "1",
+      "imageUrl": "",
+      "notes": "",
+      "id": 9
     }
   ],
   "categories": [
@@ -75,6 +83,11 @@
       "id": 2,
       "cateId": 2,
       "cateName": "Pizza"
+    },
+    {
+      "cateId": 3,
+      "cateName": "abc",
+      "id": 3
     }
   ],
   "cart": [],

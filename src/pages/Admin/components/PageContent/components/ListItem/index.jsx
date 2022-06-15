@@ -8,6 +8,8 @@ import {
   updateProduct,
 } from "../../../../../../redux/productSlice";
 import ProductList from "./components/ProductList";
+import CateList from "./components/CateList";
+import { addCate, removeCate, updateCate } from "../../../../../../redux/cateSlice";
 
 ListItem.propsType = {
   show: PropTypes.string,
@@ -22,14 +24,7 @@ function ListItem(props) {
   const { adminTask } = useParams();
   const dispatch = useDispatch();
 
-  const handleEditProductSubmit = (form) => {
-    dispatch(updateProduct(form));
-  };
-
-  const handleRemoveProduct = (product) => {
-    dispatch(removeProduct(product));
-  };
-
+  /*Handle product action */
   const handleAddNewProduct = (form) => {
     const formAdd = {
       ...form,
@@ -40,6 +35,18 @@ function ListItem(props) {
 
     dispatch(addProduct(formAdd));
   };
+
+  const handleEditProductSubmit = (form) => dispatch(updateProduct(form));
+
+  const handleRemoveProduct = (item) => dispatch(removeProduct(item));
+
+  /*Handle cate action */
+  const handleAddNewCate = (form) => {
+    dispatch(addCate(form));
+  };
+
+  const handleEditCateSubmit = (form) => dispatch(updateCate(form));
+  const handleRemoveCate = (item) => dispatch(removeCate(item));
 
   //   console.log({ productCate, users, orders });
   return (
@@ -53,7 +60,14 @@ function ListItem(props) {
         />
       )}
 
-      {adminTask === "categories" && <div>cate</div>}
+      {adminTask === "categories" && (
+        <CateList
+          show={show}
+          onEditSubmit={handleEditCateSubmit}
+          onRemove={handleRemoveCate}
+          onAddNew={handleAddNewCate}
+        />
+      )}
 
       {adminTask === "users" && <div>user</div>}
 

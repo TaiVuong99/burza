@@ -3,13 +3,14 @@ import { toast } from "react-toastify";
 import { call, delay, put, select, takeLatest } from "redux-saga/effects";
 import { v4 as uuid } from "uuid";
 import { clearCart } from "./cartSlice";
-import { getCateSuccess, updateCate } from "./cateSlice";
+import { addCateSuccess, getCateSuccess, removeCateSuccess, searchCateSuccess, updateCateSuccess } from "./cateSlice";
 import { cancelOrderSuccess, getOrderSuccess } from "./orderSlice";
 import { addProductSuccess, getProductsSuccess, removeProductSuccess, searchProductSuccess, updateProductSuccess } from "./productSlice";
 import { getListUserSuccess, setUser, updateUserSuccess } from "./userSlice";
 
+/*Products*/
 function* workGetProducts() {
-  yield delay(1000);
+  yield delay(500);
   try {
     const products = yield call(() =>
       axios.get(`${import.meta.env.VITE_PRODUCTS}`)
@@ -28,7 +29,7 @@ function* workGetProducts() {
   }
 }
 function* workAddProduct(action) {
-  yield delay(1000);
+  yield delay(500);
 
   try {
     const product = yield call(() => axios.post(`${import.meta.env.VITE_PRODUCTS}`, action.payload))
@@ -55,10 +56,9 @@ function* workAddProduct(action) {
       progress: undefined,
     });
   }
-  console.log(action.payload)
 }
 function* workUpdateProduct(action) {
-  yield delay(1000);
+  yield delay(500);
 
   try {
     const product = yield call(() =>
@@ -91,16 +91,10 @@ function* workUpdateProduct(action) {
       progress: undefined,
     });
   }
-  //   const product = yield call(() =>
-  //   axios.put(
-  //     `${import.meta.env.VITE_PRODUCTS}/?productId=${action.payload.productId}&cateId=${action.payload.cateId}`,
-  //     action.payload
-  //   )
-  // );
 }
 
 function* workRemoveProduct(action) {
-  yield delay(1000)
+  yield delay(500)
 
   try {
     yield call(() => axios.delete(`${import.meta.env.VITE_PRODUCTS}/${action.payload.id}`))
@@ -135,8 +129,9 @@ function* workSearchProduct(action) {
   yield put(searchProductSuccess(listSearch))
 }
 
+/*Category*/
 function* workGetCate() {
-  yield delay(1000);
+  yield delay(500);
   try {
     const cate = yield call(() => axios.get(`${import.meta.env.VITE_CATE}`));
     if (cate.status === 200) yield put(getCateSuccess(cate.data));
@@ -153,8 +148,102 @@ function* workGetCate() {
   }
 }
 
+function* workAddCate(action) {
+  try {
+    const cate = yield call(() => axios.post(`${import.meta.env.VITE_CATE}`, action.payload))
+
+    toast.success(`Add successfully !!!`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    yield put(addCateSuccess(cate.data))
+  } catch {
+    toast.error(`Fail to add category`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
+function* workUpdateCate(action) {
+  yield delay(500);
+
+  try {
+    const cate = yield call(() => axios.put(`${import.meta.env.VITE_CATE}/${action.payload.id}`,action.payload));
+
+    toast.success(`Update successfully !!!`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    yield put(updateCateSuccess(cate.data))
+  } catch {
+    toast.success(`Fail to update category`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
+function* workRemoveCate(action) {
+  yield delay(500)
+
+  try {
+    yield call(() => axios.delete(`${import.meta.env.VITE_CATE}/${action.payload.id}`))
+    
+    toast.success(`Remove Successfully`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    yield put(removeCateSuccess(action.payload))
+  } catch {
+    toast.error(`Fail to remove product`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
+function* workSearchCate(action) {
+  const cate = yield call(() => axios.get(`${import.meta.env.VITE_CATE}`));
+  const listSearch = yield cate.data.filter(item => item.cateName.toLowerCase().includes(action.payload))
+  yield put(searchCateSuccess(listSearch))
+}
+/*Users*/
 function* workGetListUser(action) {
-  yield delay(1000);
+  yield delay(500);
 
   try {
     const users = yield call(() => axios.get(`${import.meta.env.VITE_USER}`));
@@ -173,7 +262,7 @@ function* workGetListUser(action) {
 }
 
 function* workCreateUser(action) {
-  yield delay(1000);
+  yield delay(500);
 
   const formSignUp = {
     ...action.payload,
@@ -248,7 +337,7 @@ function* workUpdateUser(action) {
 }
 
 function* workGetOrder(action) {
-  yield delay(1000);
+  yield delay(500);
 
   const state = yield select();
   const user = state.user.user;
@@ -275,7 +364,7 @@ function* workGetOrder(action) {
 }
 
 function* workGetListOrder(action) {
-  yield delay(1000);
+  yield delay(500);
 
   try {
     const order = yield call(() => axios.get(`${import.meta.env.VITE_ORDER}`));
@@ -294,7 +383,7 @@ function* workGetListOrder(action) {
 }
 
 function* workPostOrder(action) {
-  yield delay(1000);
+  yield delay(500);
 
   const today = new Date();
   const date =
@@ -337,7 +426,7 @@ function* workPostOrder(action) {
 }
 
 function* workCancelOrder(action) {
-  yield delay(1000);
+  yield delay(500);
 
   const formCancel = {
     ...action.payload,
@@ -381,6 +470,13 @@ function* saga() {
   yield takeLatest("products/searchProduct", workSearchProduct);
 
   yield takeLatest("cate/getCate", workGetCate);
+  yield takeLatest("cate/addCate", workAddCate);
+  yield takeLatest("cate/updateCate", workUpdateCate);
+  yield takeLatest("cate/removeCate", workRemoveCate);
+  yield takeLatest("cate/searchCate", workSearchCate);
+  
+
+  
 
   yield takeLatest("user/getListUser", workGetListUser);
   yield takeLatest("user/createUser", workCreateUser);
