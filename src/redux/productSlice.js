@@ -1,30 +1,54 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const productSlice = createSlice({
-    name: 'products',
-    initialState: [],
-    reducers: {
-        getProducts: () => {},
+  name: "products",
+  initialState: [],
+  reducers: {
+    getProducts: () => {},
 
-        getProductsSuccess: (state, action) => {
-            return state = action.payload
-        },
+    getProductsSuccess: (state, action) => {
+      return (state = action.payload);
+    },
 
-        updateProduct: () => {},
+    addProduct: () => {},
 
-        updateProductSuccess: (state, action) => {
-            state[action.payload.id - 1] = {...action.payload}
-        },
+    addProductSuccess: (state, action) => {
+        state.push(action.payload)
+    },
 
-        removeProduct: () => {},
+    updateProduct: () => {},
 
-        removeProductSuccess: (state, action) => {
-            return state.filter(product => product.id !== action.payload.id)
-        }
+    updateProductSuccess: (state, action) => {
+      state[action.payload.id - 1] = { ...action.payload };
+    },
+
+    removeProduct: () => {},
+
+    removeProductSuccess: (state, action) => {
+      return state.filter((product) => product.id !== action.payload.id);
+    },
+
+    searchProduct: () => {},
+
+    searchProductSuccess: (state, action) => {
+        return state = action.payload
+        console.log(action.payload)
     }
-})
+  },
+});
 
-const {actions, reducer} = productSlice
+const { actions, reducer } = productSlice;
 
-export const {getProducts, getProductsSuccess, updateProduct, updateProductSuccess, removeProduct, removeProductSuccess} = actions
-export default reducer
+export const {
+  getProducts,
+  getProductsSuccess,
+  addProduct,
+  addProductSuccess,
+  updateProduct,
+  updateProductSuccess,
+  removeProduct,
+  removeProductSuccess,
+  searchProduct,
+  searchProductSuccess
+} = actions;
+export default reducer;

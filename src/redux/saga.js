@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid";
 import { clearCart } from "./cartSlice";
 import { getCateSuccess, updateCate } from "./cateSlice";
 import { cancelOrderSuccess, getOrderSuccess } from "./orderSlice";
-import { getProductsSuccess, removeProductSuccess, updateProductSuccess } from "./productSlice";
+import { addProductSuccess, getProductsSuccess, removeProductSuccess, searchProductSuccess, updateProductSuccess } from "./productSlice";
 import { getListUserSuccess, setUser, updateUserSuccess } from "./userSlice";
 
 function* workGetProducts() {
@@ -27,7 +27,36 @@ function* workGetProducts() {
     });
   }
 }
+function* workAddProduct(action) {
+  yield delay(1000);
 
+  try {
+    const product = yield call(() => axios.post(`${import.meta.env.VITE_PRODUCTS}`, action.payload))
+
+    toast.success(`Add Successfully`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    yield put(addProductSuccess(product.data))
+  } catch {
+    toast.error(`Fail to add product`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+  console.log(action.payload)
+}
 function* workUpdateProduct(action) {
   yield delay(1000);
 
@@ -98,6 +127,12 @@ function* workRemoveProduct(action) {
       progress: undefined,
     });
   }
+}
+
+function* workSearchProduct(action) {
+  const products = yield call(() => axios.get(`${import.meta.env.VITE_PRODUCTS}`));
+  const listSearch = yield products.data.filter(product => product.productName.toLowerCase().includes(action.payload))
+  yield put(searchProductSuccess(listSearch))
 }
 
 function* workGetCate() {
@@ -340,8 +375,10 @@ function* workCancelOrder(action) {
 
 function* saga() {
   yield takeLatest("products/getProducts", workGetProducts);
+  yield takeLatest("products/addProduct", workAddProduct);
   yield takeLatest("products/updateProduct", workUpdateProduct);
   yield takeLatest("products/removeProduct", workRemoveProduct);
+  yield takeLatest("products/searchProduct", workSearchProduct);
 
   yield takeLatest("cate/getCate", workGetCate);
 

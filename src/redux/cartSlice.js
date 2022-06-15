@@ -5,11 +5,13 @@ const cartSlice = createSlice({
   initialState: [],
   reducers: {
     addCart: (state, action) => {
-      let indexExist = state.findIndex(
-        (product) =>
-          product.productId === action.payload.productId &&
-          product.cateId === action.payload.cateId
-      );
+      let indexExist = state.findIndex((product) => product.id === action.payload.id);
+
+      // let indexExist = state.findIndex(
+      //   (product) =>
+      //     product.productId === action.payload.productId &&
+      //     product.cateId === action.payload.cateId
+      // );
 
       if (indexExist < 0) {
         state.push(action.payload);
@@ -23,11 +25,7 @@ const cartSlice = createSlice({
     },
 
     updateCart: (state, action) => {
-      let indexExist = state.findIndex(
-        (product) =>
-          product.productId === action.payload.productId &&
-          product.cateId === action.payload.cateId
-      );
+      let indexExist = state.findIndex((product) => product.id === action.payload.id);
 
       if (indexExist < 0) return;
       else {
@@ -40,18 +38,13 @@ const cartSlice = createSlice({
     },
 
     deleteCart: (state, action) => {
-      let indexRemove = state.findIndex(
-        (product) =>
-          product.productId === action.payload.productId &&
-          product.cateId === action.payload.cateId
-      );
-
-     state.splice(indexRemove, 1)
+      let indexRemove = state.findIndex((product) => product.id === action.payload.id);
+      state.splice(indexRemove, 1);
     },
 
     clearCart: (state, action) => {
-      return state = []
-    }
+      return (state = []);
+    },
   },
 });
 

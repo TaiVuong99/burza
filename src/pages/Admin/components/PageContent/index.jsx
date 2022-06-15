@@ -3,7 +3,7 @@ import { FaPowerOff } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getListOrder } from "../../../../redux/orderSlice";
-import { getProducts } from "../../../../redux/productSlice";
+import { getProducts, searchProduct } from "../../../../redux/productSlice";
 import { getListUser } from "../../../../redux/userSlice";
 import { getCate } from "../../../../redux/cateSlice";
 
@@ -19,7 +19,7 @@ function PageContent() {
 
   const dispatch = useDispatch();
 
-  const [show, setShow] = useState(5);
+  const [show, setShow] = useState("5");
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function PageContent() {
     dispatch(getCate());
     dispatch(getListUser());
     dispatch(getListOrder());
-  }, []);
+  }, [adminTask]);
 
   const handleShowClick = (number) => {
     setShow(number);
@@ -38,7 +38,13 @@ function PageContent() {
   };
 
   const handleSubmitSearch = () => {
-    console.log("submit");
+    switch (adminTask) {
+      case "products": {
+        dispatch(searchProduct(search));
+        setSearch("");
+        break;
+      }
+    }
   };
 
   return (
@@ -61,13 +67,14 @@ function PageContent() {
             <div className="flex justify-between">
               <ShowItem onShowClick={handleShowClick} show={show} />
               <SearchItem
+                search={search}
                 onSearch={handleSearch}
                 onSubmitSearch={handleSubmitSearch}
               />
             </div>
 
             <div className="flex flex-col">
-              <ListItem show={show}/>
+              <ListItem show={show} />
               <Pagination />
             </div>
           </>
@@ -75,7 +82,7 @@ function PageContent() {
           <div>dashboard</div>
         )}
       </div>
-      <ToastContainer newestOnTop/>
+      <ToastContainer newestOnTop />
     </div>
   );
 }

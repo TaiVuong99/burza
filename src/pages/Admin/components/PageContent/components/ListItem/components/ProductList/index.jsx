@@ -7,26 +7,28 @@ import { toast } from "react-toastify";
 import { MdAddCircleOutline } from "react-icons/md";
 
 ProductList.propTypes = {
-  show: PropTypes.number,
+  show: PropTypes.string,
   onEditSubmit: PropTypes.func,
   onRemove: PropTypes.func,
+  onAddNew: PropTypes.func,
 };
 
 ProductList.defaultProps = {
-  show: 5,
+  show: "5",
   onEditSubmit: null,
   onRemove: null,
+  onAddNew: null,
 };
 
 function ProductList(props) {
-  const { show, onEditSubmit, onRemove } = props;
+  const { show, onEditSubmit, onRemove, onAddNew } = props;
 
   const products = useSelector((state) => state.products);
   const cate = useSelector((state) => state.cate);
 
   const productCate = products.map((product) => ({
     ...product,
-    ...cate.find((item) => item.cateId === product.cateId),
+    cateName: cate.find((item) => item.cateId === product.cateId).cateName,
   }));
 
   const [editIndex, setEditIndex] = useState(-1);
@@ -36,7 +38,7 @@ function ProductList(props) {
     enableReinitialize: true,
     initialValues: {
       productName: editIndex > -1 ? productCate[editIndex].productName : "",
-      cateId: editIndex > -1 ? productCate[editIndex].cateId : "",
+      cateId: editIndex > -1 ? productCate[editIndex].cateId : 1,
       price: editIndex > -1 ? productCate[editIndex].price : "",
     },
     validationSchema: Yup.object({
@@ -48,45 +50,61 @@ function ProductList(props) {
     }),
 
     onSubmit: (values) => {
-      if (
-        values.productName === productCate[editIndex].productName &&
-        values.cateId === productCate[editIndex].cateId &&
-        values.price === productCate[editIndex].price
-      ) {
-        toast.error("Data isn't changed", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        return;
-      }
-      const formUpdate = {
-        ...products[editIndex],
-        ...values,
-        cateId: +values.cateId,
-        price: +values.price,
-      };
+      if (addNew) {
+        if (onAddNew) {
+          onAddNew(values);
+          setAddNew(false);
+        }
+      } else {
+        if (
+          values.productName === productCate[editIndex].productName &&
+          values.cateId === productCate[editIndex].cateId &&
+          values.price === productCate[editIndex].price
+        ) {
+          toast.error("Data isn't changed", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          return;
+        }
 
-      if (onEditSubmit) {
-        onEditSubmit(formUpdate);
-        setEditIndex(-1);
+        const formUpdate = {
+          ...products[editIndex],
+          ...values,
+          cateId: +values.cateId,
+          price: +values.price,
+        };
+
+        if (onEditSubmit) {
+          onEditSubmit(formUpdate);
+          setEditIndex(-1);
+        }
       }
     },
   });
 
   const handleEditClick = (index) => {
     setEditIndex(index);
+    setAddNew(false);
   };
 
-  const handleCancelClick = () => {
+  const handleCancelEditClick = () => {
     formik.setFieldValue("productName", productCate[editIndex].productName);
     formik.setFieldValue("cateId", productCate[editIndex].cateName);
     formik.setFieldValue("price", productCate[editIndex].price);
     setEditIndex(-1);
+  };
+
+  const handleCancelAddClick = () => {
+    setAddNew(false);
+    formik.setFieldValue("productName", "");
+    formik.setFieldValue("cateId", 1);
+    formik.setFieldValue("price", "");
   };
 
   const handleRemoveClick = (product) => {
@@ -97,6 +115,11 @@ function ProductList(props) {
 
   const handleChange = (e) => {
     formik.setFieldValue("cateId", e.target.value);
+  };
+
+  const handleAddNew = () => {
+    setAddNew(true);
+    setEditIndex(-1);
   };
 
   return (
@@ -121,7 +144,7 @@ function ProductList(props) {
                 <form onSubmit={formik.handleSubmit}>
                   <li className="admin-items" key={index}>
                     <div className="col-span-1 py-1 border-r-2 border-t-2 flex items-center justify-center">
-                      {index + 1}
+                      {product.id}
                     </div>
 
                     <div className="col-span-3 border-r-2 border-t-2 flex flex-col justify-center px-2">
@@ -171,7 +194,7 @@ function ProductList(props) {
                     <div className="col-span-3 border-t-2 flex justify-evenly items-center">
                       <div
                         className="cursor-pointer hover:underline hover:font-bold"
-                        onClick={handleCancelClick}
+                        onClick={handleCancelEditClick}
                       >
                         Cancel
                       </div>
@@ -224,83 +247,81 @@ function ProductList(props) {
         </>
       ))}
 
-      {/* {addNew ? (
-        <div className="admin-item border-t-2">
-          <form onSubmit={formik.handleSubmit}>
-            <div className="admin-items">
-              <div className="col-span-1 py-1 border-r-2 border-t-2 flex items-center justify-center">
-                    6
-              </div>
-
-              <div className="col-span-3 border-r-2 border-t-2 flex flex-col justify-center px-2">
-                <input
-                  type="text"
-                  name="productName"
-                  value={formik.values.productName}
-                  onChange={formik.handleChange}
-                  className="w-full border-[1px]"
-                />
-                {formik.touched.productName && formik.errors.productName ? (
-                  <div className="form-error">{formik.errors.productName}</div>
-                ) : null}
-              </div>
-
-              <div className="col-span-3 border-r-2 border-t-2 flex items-center px-2">
-                <select
-                  name="cate"
-                  value={formik.values.cateId}
-                  onChange={(e) => handleChange(e)}
-                  className="w-full border-[1px]"
-                >
-                  {cate.map((i) => (
-                    <option value={i.cateId} key={i.cateId}>
-                      {i.cateName}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="col-span-2 border-r-2 border-t-2 flex flex-col justify-center px-2">
-                <input
-                  type="text"
-                  name="price"
-                  value={formik.values.price}
-                  onChange={formik.handleChange}
-                  className="w-full border-[1px]"
-                />
-                {formik.touched.price && formik.errors.price ? (
-                  <div className="form-error">{formik.errors.price}</div>
-                ) : null}
-              </div>
-
-              <div className="col-span-3 border-t-2 flex justify-evenly items-center">
-                <div
-                  className="cursor-pointer hover:underline hover:font-bold"
-                  onClick={() => setAddNew(false)}
-                >
-                  Cancel
-                </div>
-
-                <button
-                  type="submit"
-                  className="text-green-600 hover:underline hover:font-bold"
-                >
-                  Save
-                </button>
-              </div>
+      {addNew ? (
+        <form onSubmit={formik.handleSubmit}>
+          <div className="admin-items border-t-2">
+            <div className="col-span-1 py-1 border-r-2 flex items-center justify-center">
+              {productCate[productCate.length - 1].id + 1}
             </div>
-          </form>
-        </div>
+
+            <div className="col-span-3 border-r-2 flex flex-col justify-center px-2">
+              <input
+                type="text"
+                name="productName"
+                value={formik.values.productName}
+                onChange={formik.handleChange}
+                className="w-full border-[1px]"
+              />
+              {formik.touched.productName && formik.errors.productName ? (
+                <div className="form-error">{formik.errors.productName}</div>
+              ) : null}
+            </div>
+
+            <div className="col-span-3 border-r-2 flex items-center px-2">
+              <select
+                name="cate"
+                value={formik.values.cateId}
+                onChange={(e) => handleChange(e)}
+                className="w-full border-[1px]"
+              >
+                {cate.map((i) => (
+                  <option value={i.cateId} key={i.cateId}>
+                    {i.cateName}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="col-span-2 border-r-2 flex flex-col justify-center px-2">
+              <input
+                type="text"
+                name="price"
+                value={formik.values.price}
+                onChange={formik.handleChange}
+                className="w-full border-[1px]"
+              />
+              {formik.touched.price && formik.errors.price ? (
+                <div className="form-error">{formik.errors.price}</div>
+              ) : null}
+            </div>
+
+            <div className="col-span-3 flex justify-evenly items-center">
+              <div
+                className="cursor-pointer hover:underline hover:font-bold"
+                onClick={handleCancelAddClick}
+              >
+                Cancel
+              </div>
+
+              <button
+                type="submit"
+                className="text-green-600 hover:underline hover:font-bold"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
       ) : (
         <div className="admin-items border-t-2">
           <div
             className="col-span-1 py-1 border-r-2 flex items-center justify-center cursor-pointer hover:text-green-600"
-            onClick={() => setAddNew(true)}
+            onClick={handleAddNew}
           >
             <MdAddCircleOutline />
           </div>
         </div>
-      )} */}
+      )}
     </ul>
   );
 }

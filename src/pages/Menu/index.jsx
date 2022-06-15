@@ -16,7 +16,7 @@ function Menu() {
 
   const productCate = products.map((product) => ({
     ...product,
-    ...cate.find((item) => item.cateId === product.cateId),
+    cateName: cate.find((item) => item.cateId === product.cateId).cateName,
   }));
 
   const [list, setList] = useState([]);
