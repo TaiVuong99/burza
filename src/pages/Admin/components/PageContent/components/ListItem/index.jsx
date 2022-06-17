@@ -3,13 +3,19 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
+  addCate,
+  removeCate,
+  updateCate,
+} from "../../../../../../redux/cateSlice";
+import {
   addProduct,
   removeProduct,
   updateProduct,
 } from "../../../../../../redux/productSlice";
-import ProductList from "./components/ProductList";
+import { createUser, removeUser } from "../../../../../../redux/userSlice";
 import CateList from "./components/CateList";
-import { addCate, removeCate, updateCate } from "../../../../../../redux/cateSlice";
+import ProductList from "./components/ProductList";
+import UserList from "./components/UserList";
 
 ListItem.propsType = {
   show: PropTypes.string,
@@ -48,6 +54,15 @@ function ListItem(props) {
   const handleEditCateSubmit = (form) => dispatch(updateCate(form));
   const handleRemoveCate = (item) => dispatch(removeCate(item));
 
+  /*Handle user action */
+
+  const handleAddNewUser = (form) => {
+    dispatch(createUser(form));
+  };
+
+  const handleEditUserSubmit = (form) => dispatch(updateCate(form));
+  const handleRemoveUser = (item) => dispatch(removeUser(item));
+
   //   console.log({ productCate, users, orders });
   return (
     <>
@@ -69,7 +84,14 @@ function ListItem(props) {
         />
       )}
 
-      {adminTask === "users" && <div>user</div>}
+      {adminTask === "users" && (
+        <UserList
+          show={show}
+          onEditSubmit={handleEditUserSubmit}
+          onRemove={handleRemoveUser}
+          onAddNew={handleAddNewUser}
+        />
+      )}
 
       {adminTask === "orders" && <div>order</div>}
     </>

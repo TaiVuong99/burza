@@ -65,9 +65,9 @@
       "notes": ""
     },
     {
-      "productName": "a",
+      "productName": "Abc",
       "cateId": 3,
-      "price": "1",
+      "price": "123",
       "imageUrl": "",
       "notes": "",
       "id": 9
@@ -91,6 +91,23 @@
     }
   ],
   "cart": [],
-  "users": [],
+  "users": [
+    {
+      "phone": "1234567890",
+      "password": "Qwer@123",
+      "address": "",
+      "name": "",
+      "userId": "553ddbf3",
+      "id": 1
+    },
+    {
+      "phone": "213125435345",
+      "password": "QWer@123",
+      "userId": "14c5c2f3",
+      "address": "",
+      "name": "",
+      "id": 2
+    }
+  ],
   "orders": []
 }

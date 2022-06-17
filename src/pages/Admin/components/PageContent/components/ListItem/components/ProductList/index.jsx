@@ -1,10 +1,10 @@
-import React, { useMemo, useState } from "react";
-import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-import { toast } from "react-toastify";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { MdAddCircleOutline } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import * as Yup from "yup";
 
 ProductList.propTypes = {
   show: PropTypes.string,
@@ -26,10 +26,10 @@ function ProductList(props) {
   const products = useSelector((state) => state.products);
   const cate = useSelector((state) => state.cate);
 
-  const productCate = useMemo(() =>products.map((product) => ({
+  const productCate = products.map((product) => ({
     ...product,
     cateName: cate.find((item) => item.cateId === product.cateId).cateName,
-  })), [])
+  }));
 
   const [editIndex, setEditIndex] = useState(-1);
   const [addNew, setAddNew] = useState(false);
@@ -142,7 +142,7 @@ function ProductList(props) {
             <>
               {index === editIndex ? (
                 <form onSubmit={formik.handleSubmit}>
-                  <li className="admin-items border-t-2" key={index}>
+                  <li className="admin-items border-t-2" key={product.id}>
                     <div className="col-span-1 py-1 border-r-2 flex items-center justify-center">
                       {product.id}
                     </div>
@@ -209,7 +209,7 @@ function ProductList(props) {
                   </li>
                 </form>
               ) : (
-                <li className="admin-items border-t-2" key={index}>
+                <li className="admin-items border-t-2" key={product.id}>
                   <div className="col-span-1 py-1 border-r-2 flex items-center justify-center">
                     {product.id}
                   </div>

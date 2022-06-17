@@ -11,34 +11,59 @@ const userSlice = createSlice({
     getListUser: () => {},
 
     getListUserSuccess: (state, action) => {
-        state.users = action.payload
+      const clone = { ...state };
+
+      clone.users = action.payload;
+
+      return (state = { ...clone });
     },
 
     createUser: () => {},
 
     setUser: (state, action) => {
-        state.users.push(action.payload)
-        state.user = action.payload
+      state.users.push(action.payload);
+      state.user = action.payload;
     },
 
     userLogin: (state, action) => {
-        state.user = action.payload
-        state.isLogin = true
+      state.user = action.payload;
+      state.isLogin = true;
     },
 
     updateUser: () => {},
 
     updateUserSuccess: (state, action) => {
-        state.user = action.payload
+      state.user = action.payload;
     },
 
     signOutUser: (state) => {
-      state.user = {}
-      state.isLogin = false
-    }
+      state.user = {};
+      state.isLogin = false;
+    },
+
+    removeUser: () => {},
+
+    removeUserSuccess: (state, action) => {
+      const clone = { ...state };
+
+      clone.users = clone.users.filter((item) => item.id !== action.payload.id);
+
+      return (state = { ...clone });
+    },
   },
 });
 
 const { actions, reducer } = userSlice;
-export const { getListUser, getListUserSuccess, createUser, setUser, userLogin, updateUser, updateUserSuccess, signOutUser } = actions;
+export const {
+  getListUser,
+  getListUserSuccess,
+  createUser,
+  setUser,
+  userLogin,
+  updateUser,
+  updateUserSuccess,
+  signOutUser,
+  removeUser,
+  removeUserSuccess,
+} = actions;
 export default reducer;

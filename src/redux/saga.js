@@ -6,7 +6,7 @@ import { clearCart } from "./cartSlice";
 import { addCateSuccess, getCateSuccess, removeCateSuccess, searchCateSuccess, updateCateSuccess } from "./cateSlice";
 import { cancelOrderSuccess, getOrderSuccess } from "./orderSlice";
 import { addProductSuccess, getProductsSuccess, removeProductSuccess, searchProductSuccess, updateProductSuccess } from "./productSlice";
-import { getListUserSuccess, setUser, updateUserSuccess } from "./userSlice";
+import { getListUserSuccess, removeUserSuccess, setUser, updateUserSuccess } from "./userSlice";
 
 /*Products*/
 function* workGetProducts() {
@@ -247,7 +247,7 @@ function* workGetListUser(action) {
 
   try {
     const users = yield call(() => axios.get(`${import.meta.env.VITE_USER}`));
-    if (users.status === 200) yield put(getListUserSuccess(users.data));
+    yield put(getListUserSuccess(users.data));
   } catch (e) {
     toast.error(`Fail to fetch list user`, {
       position: "bottom-right",
@@ -263,11 +263,11 @@ function* workGetListUser(action) {
 
 function* workCreateUser(action) {
   yield delay(500);
-
   const formSignUp = {
     ...action.payload,
-    name: "",
-    userId: uuid(),
+    address: action.payload.address ? action.payload.address: "",
+    name: action.payload.name ? action.payload.name : "",
+    userId: action.payload.userId ? action.payload.userId : uuid().split('-')[0],
   };
 
   try {
@@ -336,6 +336,37 @@ function* workUpdateUser(action) {
   }
 }
 
+function* workRemoveUser(action) {
+  yield delay(500)
+
+  try {
+    // yield call(() => axios.delete(`${import.meta.env.VITE_USER}/${action.payload.id}`))
+    
+    toast.success(`Remove Successfully`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    yield put(removeUserSuccess(action.payload))
+  } catch {
+    toast.error(`Fail to remove user`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
+/*Orders */
 function* workGetOrder(action) {
   yield delay(500);
 
@@ -474,13 +505,12 @@ function* saga() {
   yield takeLatest("cate/updateCate", workUpdateCate);
   yield takeLatest("cate/removeCate", workRemoveCate);
   yield takeLatest("cate/searchCate", workSearchCate);
-  
-
-  
 
   yield takeLatest("user/getListUser", workGetListUser);
   yield takeLatest("user/createUser", workCreateUser);
   yield takeLatest("user/updateUser", workUpdateUser);
+  yield takeLatest("user/removeUser", workRemoveUser);
+  
 
   yield takeLatest("order/getOrder", workGetOrder);
   yield takeLatest("order/getListOrder", workGetListOrder);
