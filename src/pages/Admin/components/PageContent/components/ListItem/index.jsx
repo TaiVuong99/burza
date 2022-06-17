@@ -12,7 +12,7 @@ import {
   removeProduct,
   updateProduct,
 } from "../../../../../../redux/productSlice";
-import { createUser, removeUser } from "../../../../../../redux/userSlice";
+import { createUser, removeUser, updateUser, updateUserByAdmin } from "../../../../../../redux/userSlice";
 import CateList from "./components/CateList";
 import ProductList from "./components/ProductList";
 import UserList from "./components/UserList";
@@ -60,7 +60,7 @@ function ListItem(props) {
     dispatch(createUser(form));
   };
 
-  const handleEditUserSubmit = (form) => dispatch(updateCate(form));
+  const handleEditUserSubmit = (form) => dispatch(updateUserByAdmin(form));
   const handleRemoveUser = (item) => dispatch(removeUser(item));
 
   //   console.log({ productCate, users, orders });

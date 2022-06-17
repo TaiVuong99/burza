@@ -36,6 +36,12 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
 
+    updateUserByAdmin: () => {},
+
+    updateUserByAdminSuccess: (state, action) => {
+      state.users[action.payload.id - 1] = action.payload
+    },
+
     signOutUser: (state) => {
       state.user = {};
       state.isLogin = false;
@@ -65,5 +71,7 @@ export const {
   signOutUser,
   removeUser,
   removeUserSuccess,
+  updateUserByAdmin,
+  updateUserByAdminSuccess
 } = actions;
 export default reducer;

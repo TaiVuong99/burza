@@ -101,34 +101,37 @@ function UserList(props) {
               progress: undefined,
             });
             onAddNew(values);
-            handleCancelAddClick()
-
+            handleCancelAddClick();
           }
         }
+      } else {
+        if (
+          values.password === users[editIndex].password &&
+          values.name === users[editIndex].name &&
+          values.address === users[editIndex].address
+        ) {
+          toast.error("Data isn't changed", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          return;
+        }
+
+        const formUpdate = {
+          ...users[editIndex],
+          ...values,
+        };
+
+        if (onEditSubmit) {
+          onEditSubmit(formUpdate);
+          setEditIndex(-1);
+        }
       }
-      //     if (values.cateName === cate[editIndex].cateName) {
-      //     toast.error("Data isn't changed", {
-      //       position: "bottom-right",
-      //       autoClose: 2000,
-      //       hideProgressBar: false,
-      //       closeOnClick: true,
-      //       pauseOnHover: true,
-      //       draggable: true,
-      //       progress: undefined,
-      //     });
-      //     return;
-      //   }
-
-      //     const formUpdate = {
-      //       ...cate[editIndex],
-      //       ...values,
-      //     };
-
-      //     if (onEditSubmit) {
-      //       onEditSubmit(formUpdate);
-      //       setEditIndex(-1);
-      //     }
-      //   }
     },
   });
 

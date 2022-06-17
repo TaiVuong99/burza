@@ -6,7 +6,7 @@ import { clearCart } from "./cartSlice";
 import { addCateSuccess, getCateSuccess, removeCateSuccess, searchCateSuccess, updateCateSuccess } from "./cateSlice";
 import { cancelOrderSuccess, getOrderSuccess } from "./orderSlice";
 import { addProductSuccess, getProductsSuccess, removeProductSuccess, searchProductSuccess, updateProductSuccess } from "./productSlice";
-import { getListUserSuccess, removeUserSuccess, setUser, updateUserSuccess } from "./userSlice";
+import { getListUserSuccess, removeUserSuccess, setUser, updateUserByAdminSuccess, updateUserSuccess } from "./userSlice";
 
 /*Products*/
 function* workGetProducts() {
@@ -335,6 +335,33 @@ function* workUpdateUser(action) {
     });
   }
 }
+function* workUpdateUserByAdmin(action) {
+  yield delay(500) 
+
+  try {
+    const user = yield call(() => axios.put(`${import.meta.env.VITE_USER}/${action.payload.id}`, action.payload))
+    toast.success(`Update Successfully`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    yield put(updateUserByAdminSuccess(action.payload))
+  } catch {
+    toast.error(`Fail to update user`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
 
 function* workRemoveUser(action) {
   yield delay(500)
@@ -509,6 +536,7 @@ function* saga() {
   yield takeLatest("user/getListUser", workGetListUser);
   yield takeLatest("user/createUser", workCreateUser);
   yield takeLatest("user/updateUser", workUpdateUser);
+  yield takeLatest("user/updateUserByAdmin", workUpdateUserByAdmin);
   yield takeLatest("user/removeUser", workRemoveUser);
   
 
