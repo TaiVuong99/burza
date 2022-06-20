@@ -20,6 +20,7 @@ import { getProducts } from "./redux/productSlice";
 import { getListUser } from "./redux/userSlice";
 import Admin from "./pages/Admin";
 import { getListOrder } from "./redux/orderSlice";
+import MaintenanceSystem from "./components/MaintenanceSystem";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,10 +37,10 @@ function App() {
       <BrowserView className="App">
         <Header />
         <Routes>
-          <Route path="admin" element={<Admin/>}>
-            <Route path=":adminTask" element={<Admin/>}/>
+          <Route path="admin" element={<Admin />}>
+            <Route path=":adminTask" element={<Admin />} />
           </Route>
-          
+
           <Route path="/" element={<Home />} />
 
           <Route path="menu" element={<Menu />}>
@@ -71,9 +72,11 @@ function App() {
         <div className="mobile-content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="menu" element={<MaintenanceSystem />}>
+              <Route path=":cate" />
+            </Route>
+            <Route path="account" element={<MaintenanceSystem />} />
+            <Route path="cart" element={<MaintenanceSystem />} />
 
             <Route path="*" element={<Home />} />
           </Routes>

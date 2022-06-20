@@ -88,7 +88,7 @@ function OrderList(props) {
                 </div>
 
                 <div className="col-span-1 border-r-2 pl-2 flex items-center justify-center">
-                  {item.total}
+                  ${item.total}
                 </div>
 
                 <div className="col-span-2 border-r-2 pl-2 flex items-center justify-center">

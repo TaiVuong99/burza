@@ -12,6 +12,7 @@ import SearchItem from "./components/SearchItem";
 import ShowItem from "./components/ShowItem";
 import Pagination from "./components/Pagination";
 import { ToastContainer } from "react-toastify";
+import DashBoard from "./components/DashBoard";
 
 function PageContent() {
   const { adminTask } = useParams();
@@ -94,7 +95,7 @@ function PageContent() {
             </div>
           </>
         ) : (
-          <div>dashboard</div>
+          <DashBoard/>
         )}
       </div>
       <ToastContainer newestOnTop />
