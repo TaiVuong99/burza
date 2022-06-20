@@ -46,7 +46,6 @@ function FormLogin() {
     }),
     onSubmit: (values) => {
       const indexUser = users.findIndex((user) => user.phone === values.phone);
-
       if (indexUser < 0) {
         toast.error("The Phone or Password you entered are incorrect", {
           position: "bottom-right",
@@ -57,8 +56,8 @@ function FormLogin() {
           draggable: true,
           progress: undefined,
         });
-      }
-
+        return;
+      } 
       if (values.password === users[indexUser].password) {
         toast.success(`Login Successfully!!!`, {
           position: "bottom-right",

@@ -26,11 +26,6 @@ function CateList(props) {
   const products = useSelector((state) => state.products);
   const cate = useSelector((state) => state.cate);
 
-  const productCate = products.map((product) => ({
-    ...product,
-    cateName: cate.find((item) => item.cateId === product.cateId).cateName,
-  }))
-
   const [editIndex, setEditIndex] = useState(-1);
   const [addNew, setAddNew] = useState(false);
 
@@ -123,7 +118,7 @@ function CateList(props) {
   };
 
   const numberOfProduct = (cateId) => {
-    let number = productCate.filter((product) => product.cateId === cateId).length;
+    let number = products.filter((product) => product.cateId === cateId).length;
     return number;
   };
 

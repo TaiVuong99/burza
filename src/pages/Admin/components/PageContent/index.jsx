@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getListOrder } from "../../../../redux/orderSlice";
 import { getProducts, searchProduct } from "../../../../redux/productSlice";
-import { getListUser } from "../../../../redux/userSlice";
+import { getListUser, searchUser } from "../../../../redux/userSlice";
 import { getCate, searchCate } from "../../../../redux/cateSlice";
 
 import ListItem from "./components/ListItem";
@@ -46,6 +46,11 @@ function PageContent() {
       }
       case "categories" : {
         dispatch(searchCate(search));
+        setSearch("");
+        break;
+      }
+      case "users": {
+        dispatch(searchUser(search));
         setSearch("");
         break;
       }

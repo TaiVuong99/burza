@@ -33,6 +33,9 @@ function SearchItem(props) {
         return "type product name";
       case "categories":
         return "type category name";
+      case "users":
+        return "type phone number";
+
     }
   };
 

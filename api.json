@@ -93,12 +93,20 @@
   "cart": [],
   "users": [
     {
-      "phone": "213125435345",
-      "password": "QWer@123",
-      "userId": "14c5c2f3",
+      "phone": "1234567890",
+      "password": "Qwer@123",
+      "userId": "4be6fb07",
       "address": "",
-      "name": "abc",
+      "name": "",
       "id": 1
+    },
+    {
+      "phone": "1212121212",
+      "password": "Abcd@123",
+      "userId": "4efe21ef",
+      "address": "",
+      "name": "",
+      "id": 2
     }
   ],
   "orders": []

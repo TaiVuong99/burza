@@ -39,7 +39,7 @@ const userSlice = createSlice({
     updateUserByAdmin: () => {},
 
     updateUserByAdminSuccess: (state, action) => {
-      state.users[action.payload.id - 1] = action.payload
+      state.users[action.payload.id - 1] = action.payload;
     },
 
     signOutUser: (state) => {
@@ -54,6 +54,15 @@ const userSlice = createSlice({
 
       clone.users = clone.users.filter((item) => item.id !== action.payload.id);
 
+      return (state = { ...clone });
+    },
+
+    searchUser: () => {},
+
+    searchUserSuccess: (state, action) => {
+      const clone = { ...state };
+
+      clone.users = action.payload;
       return (state = { ...clone });
     },
   },
@@ -72,6 +81,8 @@ export const {
   removeUser,
   removeUserSuccess,
   updateUserByAdmin,
-  updateUserByAdminSuccess
+  updateUserByAdminSuccess,
+  searchUser,
+  searchUserSuccess,
 } = actions;
 export default reducer;

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { v4 as uuid } from "uuid";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 UserList.propTypes = {
   show: PropTypes.string,
@@ -29,6 +30,7 @@ function UserList(props) {
   const [editIndex, setEditIndex] = useState(-1);
   const [addNew, setAddNew] = useState(false);
   const [getNewUserId, setGetNewUserId] = useState(null);
+  const [showPass, setShowPass] = useState(false);
 
   const strongRegex = new RegExp(
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
@@ -182,7 +184,21 @@ function UserList(props) {
       <div className="admin-items">
         <div className="col-span-1 py-1 border-r-2 admin-title">#</div>
         <div className="col-span-2 border-r-2 admin-title">Phone</div>
-        <div className="col-span-2 border-r-2 admin-title">Password</div>
+        <div className="col-span-2 border-r-2 admin-title gap-2">
+          Password
+          {!showPass && (
+            <FaRegEye
+              className="cursor-pointer hover:opacity-50 text-gray-600"
+              onClick={() => setShowPass(!showPass)}
+            />
+          )}
+          {showPass && (
+            <FaRegEyeSlash
+              className="cursor-pointer hover:opacity-50 text-gray-600"
+              onClick={() => setShowPass(!showPass)}
+            />
+          )}
+        </div>
         <div className="col-span-2 border-r-2 admin-title">User Id</div>
         <div className="col-span-1 border-r-2 admin-title">Name</div>
         <div className="col-span-2 border-r-2 admin-title">Address</div>
@@ -216,7 +232,7 @@ function UserList(props) {
 
                     <div className="col-span-2 border-r-2 flex flex-col justify-center px-2">
                       <input
-                        type="text"
+                        type={showPass ? "text" : "password"}
                         name="password"
                         value={formik.values.password}
                         onChange={formik.handleChange}
@@ -283,7 +299,12 @@ function UserList(props) {
                   </div>
 
                   <div className="col-span-2 border-r-2 selection:pl-2 flex items-center justify-center">
-                    {item.password}
+                    <input
+                      type={showPass ? "text" : "password"}
+                      value={item.password}
+                      readOnly
+                      className="text-center"
+                    />
                   </div>
 
                   <div className="col-span-2 border-r-2 selection:pl-2 flex items-center justify-center">
@@ -323,7 +344,7 @@ function UserList(props) {
         <form onSubmit={formik.handleSubmit}>
           <div className="admin-items border-t-2">
             <div className="col-span-1 py-1 border-r-2 flex items-center justify-center">
-              {users[users.length - 1].id + 1}
+              {users.length > 0 ? users[users.length - 1].id + 1 : "1"}
             </div>
 
             <div className="col-span-2 border-r-2 flex flex-col justify-center px-2">
@@ -341,7 +362,7 @@ function UserList(props) {
 
             <div className="col-span-2 border-r-2 flex flex-col justify-center px-2">
               <input
-                type="text"
+                type={showPass ? "text" : "password"}
                 name="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
