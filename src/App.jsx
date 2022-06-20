@@ -37,7 +37,7 @@ function App() {
       <BrowserView className="App">
         <Header />
         <Routes>
-          <Route path="adminn" element={<Admin />}>
+          <Route path="ad" element={<Admin />}>
             <Route path=":adminTask" element={<Admin />} />
           </Route>
 
