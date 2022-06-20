@@ -35,7 +35,10 @@ function SearchItem(props) {
         return "type category name";
       case "users":
         return "type phone number";
-
+      case "orders":
+        return "type order id";
+      default:
+        return "";
     }
   };
 

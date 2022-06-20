@@ -12,7 +12,7 @@ function Checkout() {
   const handleCancel = (item) => {
     if (window.confirm("Do you want to cancel order ?")) {
       dispatch(cancelOrder(item));
-      navigate("order")
+      navigate("order");
     }
   };
 
@@ -26,9 +26,15 @@ function Checkout() {
         <Navigate to="/home" />
       ) : (
         <div className="order-bill relative">
-          {order.status === 'cancel' && (
+          {order.status === "cancel" && (
             <div className="absolute top-32 left-1/2 -translate-x-1/2  border-double border-2 p-4 uppercase text-redd border-redd font-bold text-2xl -rotate-45">
               Cancelled
+            </div>
+          )}
+
+          {order.status === "complete" && (
+            <div className="absolute top-32 left-1/2 -translate-x-1/2  border-double border-2 p-4 uppercase text-green-500 border-green-600 font-bold text-2xl -rotate-45">
+              Completed
             </div>
           )}
           <div>
@@ -106,7 +112,7 @@ function Checkout() {
 
         <button
           className={`py-2 px-4 border-2 rounded-md bg-red-600 ${
-            order.status === "cancel" ? "opacity-50 pointer-events-none" : ""
+            order.status !== "order" ? "opacity-50 pointer-events-none" : ""
           } hover:opacity-50`}
           onClick={() => handleCancel(order)}
         >

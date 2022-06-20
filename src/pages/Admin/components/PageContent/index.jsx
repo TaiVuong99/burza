@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaPowerOff } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getListOrder } from "../../../../redux/orderSlice";
+import { getListOrder, searchOrder } from "../../../../redux/orderSlice";
 import { getProducts, searchProduct } from "../../../../redux/productSlice";
 import { getListUser, searchUser } from "../../../../redux/userSlice";
 import { getCate, searchCate } from "../../../../redux/cateSlice";
@@ -51,6 +51,11 @@ function PageContent() {
       }
       case "users": {
         dispatch(searchUser(search));
+        setSearch("");
+        break;
+      }
+      case "orders": {
+        dispatch(searchOrder(search));
         setSearch("");
         break;
       }

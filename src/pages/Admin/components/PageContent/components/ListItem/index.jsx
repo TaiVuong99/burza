@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+
 import {
   addCate,
   removeCate,
@@ -12,8 +13,17 @@ import {
   removeProduct,
   updateProduct,
 } from "../../../../../../redux/productSlice";
-import { createUser, removeUser, updateUser, updateUserByAdmin } from "../../../../../../redux/userSlice";
+import {
+  createUser,
+  removeUser,
+  updateUserByAdmin,
+} from "../../../../../../redux/userSlice";
+import {
+  completeOrder,
+  cancelOrder,
+} from "../../../../../../redux/orderSlice"
 import CateList from "./components/CateList";
+import OrderList from "./components/OrderList";
 import ProductList from "./components/ProductList";
 import UserList from "./components/UserList";
 
@@ -55,7 +65,6 @@ function ListItem(props) {
   const handleRemoveCate = (item) => dispatch(removeCate(item));
 
   /*Handle user action */
-
   const handleAddNewUser = (form) => {
     dispatch(createUser(form));
   };
@@ -63,7 +72,9 @@ function ListItem(props) {
   const handleEditUserSubmit = (form) => dispatch(updateUserByAdmin(form));
   const handleRemoveUser = (item) => dispatch(removeUser(item));
 
-  //   console.log({ productCate, users, orders });
+  /*Handle order action */
+  const handleCompleteClick = (form) => dispatch(completeOrder(form));
+  const handleCancelClick = (form) => dispatch(cancelOrder(form));
   return (
     <>
       {adminTask === "products" && (
@@ -93,7 +104,13 @@ function ListItem(props) {
         />
       )}
 
-      {adminTask === "orders" && <div>order</div>}
+      {adminTask === "orders" && (
+        <OrderList
+          show={show}
+          onComplete={handleCompleteClick}
+          onCancel={handleCancelClick}
+        />
+      )}
     </>
   );
 }

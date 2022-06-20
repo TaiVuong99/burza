@@ -96,18 +96,195 @@
       "phone": "1234567890",
       "password": "Qwer@123",
       "userId": "4be6fb07",
-      "address": "",
+      "address": "Q5",
       "name": "",
       "id": 1
     },
     {
       "phone": "1212121212",
-      "password": "Abcd@123",
+      "password": "Test@123",
       "userId": "4efe21ef",
-      "address": "",
+      "address": "Q6",
       "name": "",
       "id": 2
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "user": {
+        "phone": "1234567890",
+        "password": "Qwer@123",
+        "userId": "4be6fb07",
+        "address": "Q5",
+        "name": "",
+        "id": 1
+      },
+      "foodOrder": [
+        {
+          "id": 3,
+          "cateId": 1,
+          "productName": "Burger 3",
+          "price": 28,
+          "imageUrl": "https://taivuong99.github.io/burza-images/images/burger-3.jpg",
+          "notes": "",
+          "cateName": "Burger",
+          "quantity": 1
+        },
+        {
+          "id": 4,
+          "cateId": 1,
+          "productName": "Burger 4",
+          "price": 18,
+          "imageUrl": "https://taivuong99.github.io/burza-images/images/burger-4.jpg",
+          "notes": "",
+          "cateName": "Burger",
+          "quantity": 1
+        },
+        {
+          "id": 1,
+          "cateId": 1,
+          "productName": "Burger 1",
+          "price": 38,
+          "imageUrl": "https://taivuong99.github.io/burza-images/images/burger-1.jpg",
+          "notes": "",
+          "cateName": "Burger",
+          "quantity": 2
+        },
+        {
+          "id": 7,
+          "cateId": 2,
+          "productName": "Pizza 3",
+          "price": 28,
+          "imageUrl": "https://taivuong99.github.io/burza-images/images/pizza-3.jpg",
+          "notes": "",
+          "cateName": "Pizza",
+          "quantity": 1
+        }
+      ],
+      "subtotal": 150,
+      "shipping": 5,
+      "total": 155,
+      "orderId": "95f95e86-32c8-4fd5-abc2-6db6745f3d31",
+      "dateTime": "2022/06/20 14:05:09",
+      "status": "order",
+      "id": 1
+    },
+    {
+      "user": {
+        "phone": "1234567890",
+        "password": "Qwer@123",
+        "userId": "4be6fb07",
+        "address": "Q5",
+        "name": "",
+        "id": 1
+      },
+      "foodOrder": [
+        {
+          "id": 1,
+          "cateId": 1,
+          "productName": "Burger 1",
+          "price": 38,
+          "imageUrl": "https://taivuong99.github.io/burza-images/images/burger-1.jpg",
+          "notes": "",
+          "cateName": "Burger",
+          "quantity": 1
+        },
+        {
+          "id": 6,
+          "cateId": 2,
+          "productName": "Pizza 2",
+          "price": 32,
+          "imageUrl": "https://taivuong99.github.io/burza-images/images/pizza-2.jpg",
+          "notes": "No",
+          "cateName": "Pizza",
+          "quantity": 1
+        }
+      ],
+      "subtotal": 70,
+      "shipping": 5,
+      "total": 75,
+      "orderId": "9af8871b-0821-47b2-91e8-03058f2fca95",
+      "dateTime": "2022/06/20 14:05:33",
+      "status": "complete",
+      "id": 2
+    },
+    {
+      "user": {
+        "phone": "1212121212",
+        "password": "Abcd@123",
+        "userId": "4efe21ef",
+        "address": "Q6",
+        "name": "",
+        "id": 2
+      },
+      "foodOrder": [
+        {
+          "id": 1,
+          "cateId": 1,
+          "productName": "Burger 1",
+          "price": 38,
+          "imageUrl": "https://taivuong99.github.io/burza-images/images/burger-1.jpg",
+          "notes": "",
+          "cateName": "Burger",
+          "quantity": 1
+        },
+        {
+          "id": 7,
+          "cateId": 2,
+          "productName": "Pizza 3",
+          "price": 28,
+          "imageUrl": "https://taivuong99.github.io/burza-images/images/pizza-3.jpg",
+          "notes": "",
+          "cateName": "Pizza",
+          "quantity": 1
+        }
+      ],
+      "subtotal": 66,
+      "shipping": 5,
+      "total": 71,
+      "orderId": "0dec049d90a150ef3e3f",
+      "dateTime": "2022/06/20 14:20:31",
+      "status": "cancel",
+      "id": 3
+    },
+    {
+      "user": {
+        "phone": "1212121212",
+        "password": "Abcd@123",
+        "userId": "4efe21ef",
+        "address": "Q6",
+        "name": "",
+        "id": 2
+      },
+      "foodOrder": [
+        {
+          "id": 2,
+          "cateId": 1,
+          "productName": "Burger 2",
+          "price": 32,
+          "imageUrl": "https://taivuong99.github.io/burza-images/images/burger-2.jpg",
+          "notes": "",
+          "cateName": "Burger",
+          "quantity": 1
+        },
+        {
+          "id": 8,
+          "cateId": 2,
+          "productName": "Pizza 4",
+          "price": 18,
+          "imageUrl": "https://taivuong99.github.io/burza-images/images/pizza-4.jpg",
+          "notes": "",
+          "cateName": "Pizza",
+          "quantity": 1
+        }
+      ],
+      "subtotal": 50,
+      "shipping": 5,
+      "total": 55,
+      "orderId": "86465a03-d3a910efd40f",
+      "dateTime": "2022/06/20 14:21:22",
+      "status": "cancel",
+      "id": 4
+    }
+  ]
 }

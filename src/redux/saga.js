@@ -10,7 +10,12 @@ import {
   searchCateSuccess,
   updateCateSuccess,
 } from "./cateSlice";
-import { cancelOrderSuccess, getOrderSuccess } from "./orderSlice";
+import {
+  cancelOrderSuccess,
+  completeOrderSuccess,
+  getOrderSuccess,
+  searchOrderSuccess,
+} from "./orderSlice";
 import {
   addProductSuccess,
   getProductsSuccess,
@@ -154,24 +159,24 @@ function* workSearchProduct(action) {
   );
 
   listSearch.length > 0
-  ? toast.success(`Found ${listSearch.length} results`, {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
-  : toast.error(`No result is found`, {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    ? toast.success(`Found ${listSearch.length} results`, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    : toast.error(`No result is found`, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
   yield put(searchProductSuccess(listSearch));
 }
 
@@ -298,24 +303,24 @@ function* workSearchCate(action) {
   );
 
   listSearch.length > 0
-  ? toast.success(`Found ${listSearch.length} results`, {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
-  : toast.error(`No result is found`, {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    ? toast.success(`Found ${listSearch.length} results`, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    : toast.error(`No result is found`, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
 
   yield put(searchCateSuccess(listSearch));
 }
@@ -574,7 +579,7 @@ function* workPostOrder(action) {
 
   const formOrder = {
     ...action.payload,
-    orderId: uuid(),
+    orderId: uuid().split("-")[0] + "-" + uuid().split("-")[4],
     dateTime,
     status: "order",
   };
@@ -597,6 +602,46 @@ function* workPostOrder(action) {
   }
 }
 
+function* workCompleteOrder(action) {
+  yield delay(500);
+
+  const formComplete = {
+    ...action.payload,
+    status: "complete",
+  };
+
+  try {
+    const order = yield call(() =>
+      axios.put(
+        `${import.meta.env.VITE_ORDER}/${action.payload.id}`,
+        formComplete
+      )
+    );
+
+    toast.success(`Order ${action.payload.orderId} have been completed !!!`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    yield put(completeOrderSuccess(order.data));
+  } catch {
+    toast.error(`Fail to complete order`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
 function* workCancelOrder(action) {
   yield delay(500);
 
@@ -607,12 +652,15 @@ function* workCancelOrder(action) {
 
   try {
     const order = yield call(() =>
-      axios.put(`${import.meta.env.VITE_ORDER}/${formCancel.id}`, formCancel)
+      axios.put(
+        `${import.meta.env.VITE_ORDER}/${action.payload.id}`,
+        formCancel
+      )
     );
 
     yield put(cancelOrderSuccess(order.data));
 
-    toast.success(`Cancel Order Successfully !!!`, {
+    toast.success(`Order ${action.payload.orderId} have been canceled !!!`, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -632,6 +680,35 @@ function* workCancelOrder(action) {
       progress: undefined,
     });
   }
+}
+
+function* workSearchOrder(action) {
+  const orders = yield call(() => axios.get(`${import.meta.env.VITE_ORDER}`));
+  const listSearch = yield orders.data.filter((item) => item.orderId === action.payload);
+
+  listSearch.length > 0
+    ? toast.success(`Found ${listSearch.length} results`, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    : toast.error(`No result is found`, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+  console.log(listSearch);
+
+  yield put(searchOrderSuccess(listSearch));
 }
 
 function* saga() {
@@ -657,7 +734,9 @@ function* saga() {
   yield takeLatest("order/getOrder", workGetOrder);
   yield takeLatest("order/getListOrder", workGetListOrder);
   yield takeLatest("order/postOrder", workPostOrder);
+  yield takeLatest("order/completeOrder", workCompleteOrder);
   yield takeLatest("order/cancelOrder", workCancelOrder);
+  yield takeLatest("order/searchOrder", workSearchOrder);
 }
 
 export default saga;

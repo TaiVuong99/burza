@@ -18,6 +18,16 @@ const orderSlice = createSlice({
 
     postOrder: () => {},
 
+    completeOrder: () => {},
+
+    completeOrderSuccess: (state, action) => {
+      let index = state.findIndex((order) => order.id === action.payload.id);
+
+      state[index] = {
+        ...action.payload,
+      };
+    },
+
     cancelOrder: () => {},
 
     cancelOrderSuccess: (state, action) => {
@@ -27,6 +37,12 @@ const orderSlice = createSlice({
         ...action.payload,
       };
     },
+
+    searchOrder: () => {},
+
+    searchOrderSuccess: (state, action) => {
+        return state = action.payload
+    }
   },
 });
 
@@ -37,7 +53,11 @@ export const {
   getListOrder,
   getListOrderSuccess,
   postOrder,
+  completeOrder,
+  completeOrderSuccess,
   cancelOrder,
   cancelOrderSuccess,
+  searchOrder,
+  searchOrderSuccess
 } = actions;
 export default reducer;

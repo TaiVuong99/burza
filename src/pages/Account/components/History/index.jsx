@@ -49,7 +49,7 @@ function History() {
 
                 <button
                   className={`p-2 border-2 rounded-md bg-red-600 ${
-                    item.status === "cancel"
+                    item.status !== "order"
                       ? "opacity-50 pointer-events-none"
                       : ""
                   } hover:opacity-50`}

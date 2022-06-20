@@ -208,7 +208,7 @@ function FormInfo() {
       address: Yup.string().required("This field is required."),
     }),
     onSubmit: (values) => {
-      if(values.name === user.name && values.address === user.address) {
+      if(values.name === user.name && values.address === user.address && !formik.values.showChange) {
         toast.error(`Data isn't changed`, {
           position: "bottom-right",
           autoClose: 1500,
