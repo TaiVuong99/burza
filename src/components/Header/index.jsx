@@ -5,7 +5,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../logo.svg";
 
 
-function Header() {
+function Headminer() {
   const location = useLocation();
   
   const navigate = useNavigate();
@@ -14,8 +14,8 @@ function Header() {
 
   return (
     <>
-      {location.pathname !== "/ad" &&
-        (location.pathname !== `/ad/dashboard` && location.pathname !== `/ad/products` && location.pathname !== `/ad/categories` && location.pathname !== `/ad/orders` && location.pathname !== `/ad/users`
+      {location.pathname !== "/admin" &&
+        (location.pathname !== `/admin/dashboard` && location.pathname !== `/admin/products` && location.pathname !== `/admin/categories` && location.pathname !== `/admin/orders` && location.pathname !== `/admin/users`
          && (
           <header className="header">
             <div className="flex justify-center items-center mr-4 ">
