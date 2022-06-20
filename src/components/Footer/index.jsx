@@ -13,7 +13,7 @@ function Footer() {
   const navigate = useNavigate();
   return (
     <>
-      {location.pathname !== "/admin" && location.pathname !== `/admin/dashboard` && location.pathname !== `/admin/products` && location.pathname !== `/admin/categories` && location.pathname !== `/admin/orders` && location.pathname !== `/admin/users` && (
+      {location.pathname !== "/adminn" && location.pathname !== `/adminn/dashboard` && location.pathname !== `/adminn/products` && location.pathname !== `/adminn/categories` && location.pathname !== `/adminn/orders` && location.pathname !== `/adminn/users` && (
           <footer>
             <div className="footer">
               <div className="col-container gap-2">
