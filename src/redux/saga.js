@@ -684,7 +684,7 @@ function* workCancelOrder(action) {
 
 function* workSearchOrder(action) {
   const orders = yield call(() => axios.get(`${import.meta.env.VITE_ORDER}`));
-  const listSearch = yield orders.data.filter((item) => item.orderId === action.payload);
+  const listSearch = yield orders.data.filter((item) => item.orderId.includes(action.payload));
 
   listSearch.length > 0
     ? toast.success(`Found ${listSearch.length} results`, {
