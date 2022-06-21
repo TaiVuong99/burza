@@ -156,6 +156,7 @@ function FormInfo() {
       numberCheck === true &&
       specialCheck === true
     ) {
+      console.log('go here')
       PASS_VALID.classList.remove("hidden");
 
       FORM_REQUIRED.classList.remove(`bg-red-600/40`);
@@ -313,7 +314,7 @@ function FormInfo() {
             <div className="form-input relative">
               <div
                 id="form-required"
-                className="hidden bg-red-600/50"
+                className="hidden bg-red-600/40"
                 style={{ right: "4rem" }}
               >
                 <div className="flex flex-col gap-0">
