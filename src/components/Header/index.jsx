@@ -5,7 +5,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../logo.svg";
 
 
-function Header() {
+function Headminer() {
   const location = useLocation();
   
   const navigate = useNavigate();

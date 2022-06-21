@@ -37,19 +37,19 @@ function App() {
       <BrowserView className="App">
         <Header />
         <Routes>
-          <Route path="admin" element={<Admin />}>
+          <Route path="/admin" element={<Admin />}>
             <Route path=":adminTask" element={<Admin />} />
           </Route>
 
           <Route path="/" element={<Home />} />
 
-          <Route path="menu" element={<Menu />}>
+          <Route path="/menu" element={<Menu />}>
             <Route path=":cate" element={<Menu />}>
               <Route path=":product" element={<Menu />} />
             </Route>
           </Route>
 
-          <Route path="account" element={<Account />}>
+          <Route path="/account" element={<Account />}>
             <Route path="signup" element={<Account />} />
             <Route path="info" element={<Account />} />
             <Route path="order" element={<Account />}>
@@ -57,9 +57,9 @@ function App() {
             </Route>
           </Route>
 
-          <Route path="cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart />} />
 
-          <Route path="checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<Home />} />
         </Routes>
 
